@@ -1,0 +1,31 @@
+.navbar-brand {
+  padding: 0 15px;
+}
+
+.navbar-brand img {
+  height: 50px;
+  display: inline;
+  margin: 0 5px;
+}
+
+.result-table th:first-letter {
+  text-transform: uppercase;
+}
+
+.diskuze .panel-title {
+  font-weight: bold;
+  display: inline;
+  margin-right: 20px;
+}
+
+.diskuze .email {
+  margin-left: 20px;
+}
+
+.diskuze .panel-body {
+  padding: 10px 15px;
+}
+
+.diskuze p {
+  margin: 0;
+}

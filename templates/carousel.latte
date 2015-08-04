@@ -1,0 +1,56 @@
+{layout "layout.latte"}
+
+{block #carousel}
+
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+
+        {foreach $carousel as $item}
+          <li data-target="#myCarousel" data-slide-to="{$iterator->counter - 1}" n:class="$item === $carouselActive ? active"></li>
+        {/foreach}
+
+      </ol>
+      <div class="carousel-inner" role="listbox">
+        <div n:class="$carouselActive === 'uvod' ? active, item, item0">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Koperníkův Korespondenční Seminář</h1>
+              <p>Matematický seminář pro žáky 6. &ndash; 9. tříd základních škol nebo odpovídajících ročníků gymnázií.</p><p>Baví tě matematika nebo logické hádanky?</p>
+              <p><a class="btn btn-lg btn-primary" href="#" role="button"><span class="fa fa-lg fa-user-plus"></span>&nbsp;Zaregistruj se!</a></p>
+            </div>
+          </div>
+        </div>
+
+        <div n:class="$carouselActive === 'serie' ? active, item, item1">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Série</h1>
+              <p>Pravidelně během školního roku výchází série příkladů, které vyřešíš a pošleš nám je. My je opravíme, ohodnotíme a pošleme ti zpět správné řešení.</p><p>Stáhni si aktuální sérii a pusť se do řešení!</p>
+              <p><a class="btn btn-lg btn-primary" href="/serie/{$lastSerie}" role="button"><span class="fa fa-lg fa-download"></span>&nbsp;Aktuální série</a></p>
+            </div>
+          </div>
+        </div>
+
+        <div n:class="$carouselActive === 'vysledky' ? active, item, item2">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Výsledky</h1>
+              <p>Porovnej si svoje znalosti se znalostmi tvých vrstevníků a podívej se, které příklady ti jdou a kde naopak máš více zabrat.</p><p>Zjisti, jak jsi na tom se svými znalostmi!</p>
+              <p><a class="btn btn-lg btn-primary" href="/vysledky" role="button"><span class="fa fa-lg fa-trophy"></span>&nbsp;Výsledky</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div><!-- /.carousel -->
+{/block}

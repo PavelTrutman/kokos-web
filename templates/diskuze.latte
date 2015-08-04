@@ -1,0 +1,31 @@
+{layout "carousel.latte"}
+
+{block #content}
+<h1>Diskuze</h1>
+  <div class="diskuze">
+
+  {var $id = 0}
+  {var $level = 0}
+
+  {block #item}
+    {var $innerLevel = $level}
+    {foreach $data[$id] as $post}
+      <div class="panel panel-default" id="{$post['Id']}" style="margin-left: {$innerLevel*50}px">
+        <div class="panel-heading">
+          <h2 class="panel-title">{$post['Title']}</h2><span class="date"><em>Odesláno dne {date('j. n. Y v G:i', strtotime($post['Date']))}</em></span>
+        </div>
+        <div class="panel-body">
+          {$post['Message']|noescape}
+        </div>
+        <div class="panel-footer">
+          <strong>{$post['Author']}</strong><em class="email">{$post['Email']}</em>
+          </div>
+      </div>
+      {ifset $data[$post['Id']]}
+        {include #item, $id = $post['Id'], $level = $innerLevel + 1}
+      {/ifset}
+    {/foreach}
+  {/block}
+
+  </div>
+{/block}

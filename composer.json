@@ -1,0 +1,21 @@
+{
+	"name": "kokos",
+	"description": "KoKoS - web pages",
+	"homepage": "http://kokos.gmk.cz",
+	"license": ["BSD-3-Clause", "GPL-2.0", "GPL-3.0"],
+	"authors": [
+		{
+			"name": "Pavel Trutman",
+			"homepage": "https://cz.linkedin.com/in/paveltrutman"
+		}
+	],
+	"require": {
+		"php": ">=5.3",
+		"dibi/dibi": ">=2.3.2",
+		"twbs/bootstrap": ">=3.3.5",
+		"latte/latte": ">=2.3.3"
+	},
+	"scripts": {
+		"post-update-cmd": "cp -r vendor/twbs/bootstrap/docs/dist/* www/"
+  	}
+}
