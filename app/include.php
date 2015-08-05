@@ -7,14 +7,8 @@
   include_once('db.php');
 
   // load Latte
-  //include_once('../libs/latte/latte.php');
   $latte = new Latte\Engine;
   $latte->setTempDirectory('../tmp');
-
-  // load Forms
-  //include_once('../libs/forms/Container.php');
-  //include_once('../libs/forms/Form.php');
-  use Nette\Forms\Form;
 
   // menu
   $template['menu'] = array(
