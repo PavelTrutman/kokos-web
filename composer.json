@@ -13,9 +13,14 @@
 		"php": ">=5.3",
 		"dibi/dibi": ">=2.3.2",
 		"twbs/bootstrap": ">=3.3.5",
+		"components/font-awesome": ">=4.4.0",
 		"latte/latte": ">=2.3.3"
 	},
 	"scripts": {
-		"post-update-cmd": "cp -r vendor/twbs/bootstrap/docs/dist/* www/"
+		"post-update-cmd": [
+                        "cp -r vendor/twbs/bootstrap/docs/dist/* www/",
+		        "cp -r vendor/components/font-awesome/css/* www/css/",
+		        "cp -r vendor/components/font-awesome/fonts/* www/fonts/"
+                ]
   	}
 }

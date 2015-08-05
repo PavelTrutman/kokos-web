@@ -173,5 +173,44 @@
             "templating",
             "twig"
         ]
+    },
+    {
+        "name": "components/font-awesome",
+        "version": "4.4.0",
+        "version_normalized": "4.4.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/components/font-awesome.git",
+            "reference": "7dffacc72e566e5db6272244effc06f64fe9f185"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/components/font-awesome/zipball/7dffacc72e566e5db6272244effc06f64fe9f185",
+            "reference": "7dffacc72e566e5db6272244effc06f64fe9f185",
+            "shasum": ""
+        },
+        "time": "2015-07-30 02:38:45",
+        "type": "component",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "4.4.x-dev"
+            },
+            "component": {
+                "styles": [
+                    "css/font-awesome.css"
+                ],
+                "files": [
+                    "css/font-awesome.min.css",
+                    "fonts/*"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT",
+            "OFL-1.1"
+        ],
+        "description": "The iconic font designed for use with Twitter Bootstrap."
     }
 ]
