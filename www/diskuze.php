@@ -6,8 +6,10 @@
 
 use Nette\Forms\Form;
 
+// form for adding posts
 $form = new Form;
-$form->addSubmit('send', 'Odelat');
+$form->addSubmit('send', 'Odelat')
+  ->getControlPrototype()->addClass('btn-primary');
 
 $form->addText('name', 'Jméno:')
   ->addRule(Form::MAX_LENGTH, 'S tou délkou jména to zas tak nepřeháněj. %d znaků ti nestačí?', 30);
@@ -34,7 +36,7 @@ $form['text']
   ->addConditionOn($form['send'], Form::SUBMITTED)
   ->setRequired('Zapomněl jsi na text.');
 
-$form->addCheckbox('agree', 'Přečetl jsem si pravidla diskuze a respektuji je.')
+$form->addCheckbox('agree', ' Přečetl jsem si pravidla diskuze a respektuji je.')
   ->addConditionOn($form['send'], Form::SUBMITTED)
   ->addRule(Form::EQUAL, 'Je potřeba souhlasit s pravidly diskuze.', TRUE);
 
@@ -43,6 +45,26 @@ $form->addCheckbox('captcha', 'Captcha.')
   ->addRule(Form::EQUAL, 'Vyplň prosím captchu.', TRUE);
 
 $form->addSubmit('view', 'Náhled');
+
+$form->getElementPrototype()->class('form-horizontal');
+$form->getElementPrototype()->role('form');
+
+foreach ($form->getControls() as $control) {
+  if (!$control instanceof Nette\Forms\Controls\Checkbox) {
+    $control->getLabelPrototype()->class("col-xs-2 control-label", TRUE);
+  }
+  if ($control instanceof Nette\Forms\Controls\TextInput || $control instanceof Nette\Forms\Controls\TextArea) {
+    $control->getControlPrototype()->addClass('form-control');
+  }
+  elseif ($control instanceof Nette\Forms\Controls\Checkbox) {
+
+  }
+  elseif ($control instanceof Nette\Forms\Controls\SubmitButton) {
+    $control->getControlPrototype()->addClass('btn btn-default');
+  }
+  else {
+  }
+}
 
 $data[0] = dibi::query('SELECT [Id], [Date], [Title], [Author], [Email], [Message] FROM [KFE_Board] WHERE [ParentId] = 0 ORDER BY [Date] DESC')->fetchAll();
 

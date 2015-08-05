@@ -29,3 +29,7 @@
 .diskuze p {
   margin: 0;
 }
+
+.diskuze textarea {
+  height: 100px;
+}
