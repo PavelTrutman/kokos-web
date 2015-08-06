@@ -9,7 +9,10 @@ use Nette\Forms\Form;
 // form for adding posts
 $form = new Form;
 $form->addSubmit('send', 'Odelat')
-  ->getControlPrototype()->addClass('btn-primary');
+  ->getControlPrototype()
+    ->setName('button')
+    ->setHtml('<span class="fa fa-paper-plane"></span>&nbsp;Odeslat')
+    ->addClass('btn-primary');
 
 $form->addText('name', 'Jméno:')
   ->addRule(Form::MAX_LENGTH, 'S tou délkou jména to zas tak nepřeháněj. %d znaků ti nestačí?', 30);
@@ -44,7 +47,10 @@ $form->addCheckbox('captcha', 'Captcha.')
   ->addConditionOn($form['send'], Form::SUBMITTED)
   ->addRule(Form::EQUAL, 'Vyplň prosím captchu.', TRUE);
 
-$form->addSubmit('view', 'Náhled');
+$form->addSubmit('view', 'Náhled')
+  ->getControlPrototype()
+    ->setName('button')
+    ->setHtml('<span class="fa fa-eye"></span>&nbsp;Náhled');
 
 $form->getElementPrototype()->class('form-horizontal');
 $form->getElementPrototype()->role('form');
