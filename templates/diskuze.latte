@@ -47,7 +47,7 @@
         </div>
         <div class="form-group">
           <div class="col-xs-offset-2 col-xs-10">
-            <div class="g-recaptcha" data-sitekey="6LeGrgoTAAAAADcm2eibbollw7PzMHt14nPu6Npi"></div>
+            <div id="captcha"></div>
           </div>
         </div>
         <div class="form-group">
@@ -86,4 +86,20 @@
   {/block}
 
   </div>
+
+  <script type='text/javascript'>
+    var captchaContainer = null;
+    var loadCaptcha = function() {l}
+      captchaContainer = grecaptcha.render('captcha', {l}
+        'sitekey' : '6LeGrgoTAAAAADcm2eibbollw7PzMHt14nPu6Npi',
+        'callback' : function(response) {l}
+          console.log(response);
+          $("#frm-captcha").prop("checked", true);
+        {r},
+        'expired-callback' : function() {l}
+          $("#frm-captcha").prop("checked", false);
+        {r}
+      {r});
+    {r};
+  </script>
 {/block}

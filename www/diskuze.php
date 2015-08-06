@@ -15,20 +15,20 @@ $form->addSubmit('send', 'Odelat')
     ->addClass('btn-primary');
 
 $form->addText('name', 'Jméno:')
-  ->addRule(Form::MAX_LENGTH, 'S tou délkou jména to zas tak nepřeháněj. %d znaků ti nestačí?', 30);
+  ->addRule(Form::MAX_LENGTH, 'S tou délkou jména to zas tak nepřeháněj. %d znaků ti nestačí?', 40);
 $form['name']
   ->addConditionOn($form['send'], Form::SUBMITTED)
   ->setRequired('Zadej prosím svoje jméno, ať víme, kdo jsi.');
 
 $form->addText('email', 'E-mail:')
-  ->addRule(Form::MAX_LENGTH, 'S tou délkou e-mailu to zas tak nepřeháněj. %d znaků ti nestačí?', 30);
+  ->addRule(Form::MAX_LENGTH, 'S tou délkou e-mailu to zas tak nepřeháněj. %d znaků ti nestačí?', 40);
 $form['email']
   ->addConditionOn($form['send'], Form::SUBMITTED)
   ->setRequired('Zadej prosím svoje jméno, ať víme, kdo jsi.')
   ->addRule(Form::EMAIL, 'Asi máš chybu v e-mailu, takhle by vypadat neměl.');
 
 $form->addText('headline', 'Nadpis:')
-       ->addRule(Form::MAX_LENGTH, 'S tou délkou naspisu to zas tak nepřeháněj. %d znaků ti nestačí?', 30);
+       ->addRule(Form::MAX_LENGTH, 'S tou délkou naspisu to zas tak nepřeháněj. %d znaků ti nestačí?', 40);
 $form['headline']
   ->addConditionOn($form['send'], Form::SUBMITTED)
   ->setRequired('Zadej svému příspěvku nějaký nadpis.');
@@ -44,6 +44,7 @@ $form->addCheckbox('agree', ' Přečetl jsem si pravidla diskuze a respektuji je
   ->addRule(Form::EQUAL, 'Je potřeba souhlasit s pravidly diskuze.', TRUE);
 
 $form->addCheckbox('captcha', 'Captcha.')
+  ->setValue(FALSE)
   ->addConditionOn($form['send'], Form::SUBMITTED)
   ->addRule(Form::EQUAL, 'Vyplň prosím captchu.', TRUE);
 
