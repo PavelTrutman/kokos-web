@@ -13,8 +13,9 @@ $formVals = array(
   'email' => 'zatvrdl@do.kokosu.cz',
   'headline' => 'Víc příkladů, víc sérií!',
   'text' => 
-'Milí KoKoSáci
-řešení KoKoSu mě strašně baví a nemohli by jste posílat série častěji s více příklady uvnitř? Já je totiž vyřeším všechny strašně rychle a pak nemám co dělat.
+'//Milí KoKoSáci//,
+
+řešení **KoKoSu** mě strašně baví a nemohli by jste posílat série častěji s více příklady uvnitř? Já je totiž vyřeším všechny strašně rychle a pak nemám co dělat.
 
 Díky moc
 
@@ -110,6 +111,15 @@ function printPosts(&$data, $id) {
     }
   }
 }
+
+$texy = new Texy();
+$texy->allowedTags = array(
+  'strong' => Texy::NONE,
+  'b' => Texy::NONE,
+  'em' => Texy::NONE,
+  'i' => Texy::NONE,
+);
+$formVals['html'] = $texy->process($formVals['text']);
 
 $template['form'] = $form;
 $template['formVals'] = $formVals;

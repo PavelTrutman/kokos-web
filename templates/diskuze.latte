@@ -71,7 +71,7 @@
             <h2 class="panel-title">{$formVals['headline']}</h2><span class="date"><em>Odesláno dne {date('j. n. Y v G:i')}</em></span>
           </div>
           <div class="panel-body">
-            {$formVals['text']|noescape}
+            {$formVals['html']|noescape}
           </div>
           <div class="panel-footer">
             <strong>{$formVals['name']}</strong><em class="email">{$formVals['email']}</em>
