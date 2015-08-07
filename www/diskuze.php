@@ -108,7 +108,23 @@ if ($form->isSuccess()) {
     $viewData['text'] = $gotValues['text'];
   }
   elseif($form['send']) {
+    // check google captcha
+    $gotValues = $form->getValues(True);
+    $recaptcha = new \ReCaptcha\ReCaptcha("6LeGrgoTAAAAAAkVNJNQSyCEySeO2Hs7bAu4z7bw");
+    $httpData = $form->getHttpData();
+    if(isset($httpData['g-recaptcha-response']) && $httpData['g-recaptcha-response'] != '') {
+      $recaptchaResponse = $httpData['g-recaptcha-response'];
+      $recaptcha = $recaptcha->verify($httpData['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
+      if($recaptcha->isSuccess()) {
 
+      }
+      else {
+        $form->addError('Špatně jsi vyplnil captchu. Zkus to znovu.');
+      }
+    }
+    else {
+      $form->addError('Nevyplnil jsi captchu. Příště to prosím nezapomeň udělat.');
+    }
   }
 }
 
