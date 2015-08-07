@@ -68,13 +68,13 @@
         <h3>Náhled</h3>
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h2 class="panel-title">{$formVals['headline']}</h2><span class="date"><em>Odesláno dne {date('j. n. Y v G:i')}</em></span>
+            <h2 class="panel-title">{$viewData['headline']}</h2><span class="date"><em>Odesláno dne {date('j. n. Y v G:i')}</em></span>
           </div>
           <div class="panel-body">
-            {$formVals['html']|noescape}
+            {$viewData['html']|noescape}
           </div>
           <div class="panel-footer">
-            <strong>{$formVals['name']}</strong><em class="email">{$formVals['email']}</em>
+            <strong>{$viewData['name']}</strong><em class="email">{$viewData['email']}</em>
           </div>
         </div>
 

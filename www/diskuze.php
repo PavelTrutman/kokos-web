@@ -1,4 +1,5 @@
 <?php
+
   $template['page'] = 'diskuze';
 
   include_once('../app/include.php');
@@ -21,16 +22,16 @@ Díky moc
 
 P.S. A dělejte taky častěji soustředění, jsou totiž super!',
 );
+$viewData = $formVals;
 
 $form = new Form;
-$form->addSubmit('send', 'Odelat')
+$form->addSubmit('send', 'send')
   ->getControlPrototype()
     ->setName('button')
     ->setHtml('<span class="fa fa-paper-plane"></span>&nbsp;Odeslat')
     ->addClass('btn-primary');
 
 $form->addText('parent', '')
-  ->addConditionOn($form['send'], Form::SUBMITTED)
   ->setRequired('Formulář nebyl korektně vyplněn. Zkus stránku znovu načíst a formulář odeslat znovu.');
 
 $form->addText('name', 'Jméno:')
@@ -68,11 +69,10 @@ $form->addCheckbox('agree', ' Přečetl jsem si pravidla diskuze a respektuji je
   ->addRule(Form::EQUAL, 'Je potřeba souhlasit s pravidly diskuze.', TRUE);
 
 $form->addCheckbox('captcha', 'Captcha.')
-  ->setValue(FALSE)
   ->addConditionOn($form['send'], Form::SUBMITTED)
   ->addRule(Form::EQUAL, 'Vyplň prosím captchu.', TRUE);
 
-$form->addSubmit('view', 'Náhled')
+$form->addSubmit('view', 'view')
   ->getControlPrototype()
     ->setName('button')
     ->setHtml('<span class="fa fa-eye"></span>&nbsp;Náhled');
@@ -97,6 +97,25 @@ foreach ($form->getControls() as $control) {
   }
 }
 
+// send form parsing
+if ($form->isSuccess()) {
+  $gotValues = $form->getValues(True);
+  if($form['view']->submittedBy) {
+    $viewData = array();
+    $viewData['name'] = $gotValues['name'] != '' ? $gotValues['name'] : '???';
+    $viewData['email'] = $gotValues['email'] != '' ? $gotValues['email'] : '???';
+    $viewData['headline'] = $gotValues['headline'] != '' ? $gotValues['headline'] : '???';
+    $viewData['text'] = $gotValues['text'];
+  }
+  elseif($form['send']) {
+
+  }
+}
+
+
+// set defaul values 
+$form['captcha']->setValue(FALSE);
+
 $data[0] = dibi::query('SELECT [Id], [Date], [Title], [Author], [Email], [Message] FROM [KFE_Board] WHERE [ParentId] = 0 ORDER BY [Date] DESC')->fetchAll();
 
 printPosts($data, 0);
@@ -113,16 +132,11 @@ function printPosts(&$data, $id) {
 }
 
 $texy = new Texy();
-$texy->allowedTags = array(
-  'strong' => Texy::NONE,
-  'b' => Texy::NONE,
-  'em' => Texy::NONE,
-  'i' => Texy::NONE,
-);
-$formVals['html'] = $texy->process($formVals['text']);
+TexyConfigurator::safeMode($texy);
 
+$viewData['html'] = $texy->process($viewData['text']);
 $template['form'] = $form;
-$template['formVals'] = $formVals;
+$template['viewData'] = $viewData;
 $template['data'] = $data;
 
 $latte->render('../templates/diskuze.latte', $template);
