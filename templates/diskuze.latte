@@ -7,7 +7,7 @@
 
     {$form->render('begin')}
 
-    <div class="form-group">
+    <div class="form-group hidden">
       {$form['parent']->label}
       <div class="col-xs-10">
         {$form['parent']->control}
@@ -42,7 +42,7 @@
         {$form['agree']->control}
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group hidden">
       <div class="col-xs-offset-2 col-xs-10">
         {$form['captcha']->control}
       </div>

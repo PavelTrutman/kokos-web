@@ -16,7 +16,11 @@
     'async' => True,
     'defer' => True,
   );
-  
+
+// TEXY
+$texy = new Texy();
+TexyConfigurator::safeMode($texy);
+
 
 use Nette\Forms\Form;
 
@@ -62,7 +66,7 @@ $form->addText('email', 'E-mail:')
 $form['email']
   ->setType('email')
   ->addConditionOn($form['send'], Form::SUBMITTED)
-  ->setRequired('Zadej prosím svoje jméno, ať víme, kdo jsi.')
+  ->setRequired('Zadej prosím svůj e-mail, ať tě kdyžtak můžeme kontaktovat přímo.')
   ->addRule(Form::EMAIL, 'Asi máš chybu v e-mailu, takhle by vypadat neměl.');
 
 $form->addText('headline', 'Nadpis:')
@@ -156,7 +160,7 @@ if ($form->isSuccess()) {
       if($recaptcha->isSuccess()) {
         // check parentId, must exists
         if(($gotValues['parent'] === '0') || count(dibi::query('SELECT [Id] FROM [KFE_Board] WHERE [Id] = %i', $gotValues['parent'])) > 0) {
-          if(dibi::query('INSERT INTO [KFE_Board] ([ParentId], [Date], [Title], [Author], [Email], [ShowEmail], [Message], [Agent]) VALUES (%i, %t, %s, %s, %s, %b, %s, %s)', $gotValues['parent'], time(), $gotValues['headline'], $gotValues['name'], $gotValues['email'], 1, $gotValues['text'], $_SERVER['HTTP_USER_AGENT'])) {
+          if(dibi::query('INSERT INTO [KFE_Board] ([ParentId], [Date], [Title], [Author], [Email], [ShowEmail], [Message], [Agent]) VALUES (%i, %t, %s, %s, %s, %b, %s, %s)', $gotValues['parent'], time(), $gotValues['headline'], $gotValues['name'], $gotValues['email'], 1, $texy->process($gotValues['text']), $_SERVER['HTTP_USER_AGENT'])) {
             $template['successes'][] = 'Tak a je to. Tvůj příspěvěk byl zveřejněn.';
           }
           else {
@@ -220,9 +224,6 @@ function resetForm($form, $defaultValues) {
   $form['captcha']->setValue($defaultValues['captcha']);
   $form->getElementPrototype()->id = 'form-zero';
 }
-
-$texy = new Texy();
-TexyConfigurator::safeMode($texy);
 
 $defaultViewData = $formVals;
 $defaultViewData['html'] = $texy->process($defaultViewData['text']);
