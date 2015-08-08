@@ -5,6 +5,16 @@
   include_once('../app/include.php');
   include_once('../app/carousel.php');
 
+  $template['javascript'][] = array(
+    'source' => './js/netteForms.js',
+  );
+  $template['javascript'][] = array(
+    'source' => 'https://www.google.com/recaptcha/api.js?onload=loadCaptcha&render=explicit',
+    'async' => True,
+    'defer' => True,
+  );
+  
+
 use Nette\Forms\Form;
 
 // form for adding posts
