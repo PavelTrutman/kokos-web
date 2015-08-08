@@ -25,6 +25,7 @@ function loadPostCaptcha() {
 function showForm(id) {
   if($('#well-' + id).length == 0) {
     newForm = formHtml.replace(/zero/g, id);
+    newForm = newForm.replace(/(="frm-[a-z]+)(")/g, '$1-' + id + '$2');
     if(id == 0) {
       $('#placeholder-form-0').after(newForm);
       $('#placeholder-form-0').remove();
