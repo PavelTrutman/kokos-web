@@ -9,6 +9,9 @@
     'source' => './js/netteForms.js',
   );
   $template['javascript'][] = array(
+    'source' => './js/diskuze.js',
+  );
+  $template['javascript'][] = array(
     'source' => 'https://www.google.com/recaptcha/api.js?onload=loadCaptcha&render=explicit',
     'async' => True,
     'defer' => True,
@@ -119,17 +122,24 @@ $defaultValues = array(
   'captcha' => False,
 );
 
+function formPreview($form, $gotValues) {
+  $viewData = array();
+  $viewData['name'] = $gotValues['name'] != '' ? $gotValues['name'] : '???';
+  $viewData['email'] = $gotValues['email'] != '' ? $gotValues['email'] : '???';
+  $viewData['headline'] = $gotValues['headline'] != '' ? $gotValues['headline'] : '???';
+  $viewData['text'] = $gotValues['text'];
+  $form->getElementPrototype()->id = 'form-' . $gotValues['parent'];
+  return $viewData;
+
+}
+
 // send form parsing
 if ($form->isSuccess()) {
   $gotValues = $form->getValues(True);
   if($form['view']->submittedBy) {
     if(($gotValues['parent'] === '0') || count(dibi::query('SELECT [Id] FROM [KFE_Board] WHERE [Id] = %i', $gotValues['parent'])) > 0) {
       $showForm[$gotValues['parent']] = True;
-      $viewData = array();
-      $viewData['name'] = $gotValues['name'] != '' ? $gotValues['name'] : '???';
-      $viewData['email'] = $gotValues['email'] != '' ? $gotValues['email'] : '???';
-      $viewData['headline'] = $gotValues['headline'] != '' ? $gotValues['headline'] : '???';
-      $viewData['text'] = $gotValues['text'];
+      $viewData = formPreview($form, $gotValues);
     }
     else {
       $form->addError('Formulář nebyl korektně vyplněn. Zkus stránku znovu načíst a formulář odeslat znovu.');
@@ -151,6 +161,8 @@ if ($form->isSuccess()) {
           }
           else {
             $form->addError('Odeslání formuláře se nezdařilo. Zkus to prosím za chvíli znovu.');
+            $showForm[$gotValues['parent']] = True;
+            $viewData = formPreview($form, $gotValues);
           }
         }
         else {
@@ -159,11 +171,22 @@ if ($form->isSuccess()) {
       }
       else {
         $form->addError('Špatně jsi vyplnil captchu. Zkus to znovu.');
+        $showForm[$gotValues['parent']] = True;
+        $viewData = formPreview($form, $gotValues);
       }
     }
     else {
       $form->addError('Nevyplnil jsi captchu. Příště to prosím nezapomeň udělat.');
+      $showForm[$gotValues['parent']] = True;
+      $viewData = formPreview($form, $gotValues);
     }
+  }
+}
+else {
+  $gotValues = $form->getValues(True);
+  if(($gotValues['parent'] === '0') || count(dibi::query('SELECT [Id] FROM [KFE_Board] WHERE [Id] = %i', $gotValues['parent'])) > 0) {
+    $showForm[$gotValues['parent']] = True;
+    $viewData = formPreview($form, $gotValues);
   }
 }
 
@@ -195,6 +218,7 @@ function resetForm($form, $defaultValues) {
   $form['text']->setValue($defaultValues['text']);
   $form['agree']->setValue($defaultValues['agree']);
   $form['captcha']->setValue($defaultValues['captcha']);
+  $form->getElementPrototype()->id = 'form-zero';
 }
 
 $texy = new Texy();
