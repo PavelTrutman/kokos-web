@@ -12,7 +12,7 @@
     'source' => './js/diskuze.js',
   );
   $template['javascript'][] = array(
-    'source' => 'https://www.google.com/recaptcha/api.js?onload=loadCaptcha&render=explicit',
+    'source' => 'https://www.google.com/recaptcha/api.js?onload=loadPostCaptcha&render=explicit',
     'async' => True,
     'defer' => True,
   );
