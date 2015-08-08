@@ -127,6 +127,20 @@
     {/foreach}
   {/block}
 
+  <nav>
+    <div class="text-center">
+      <ul class="pagination">
+
+      <li n:class="$page == 1 ? disabled"><a href="{($page != 1) ? '/diskuze/' . ($page - 1)}" aria-label="Previous"><span class="fa fa-angle-double-left" aria-hidden="true"></span></a></li>
+      {for $i = 1; $i <= $maxPage; $i++}
+        <li n:class="$page == $i ? active"><a href="/diskuze/{$i}">{$i}</a></li>
+      {/for}
+      <li n:class="$page == $maxPage ? disabled"><a href="{($page != $maxPage) ? '/diskuze/' . ($page + 1)}" aria-label="Next"><span class="fa fa-angle-double-right" aria-hidden="true"></span></a></li>
+
+      </ul>
+    </div>
+  </nav>
+
   {* empty form *}
   {capture $formHtml}
     {php resetForm($form, $defaultValues)}

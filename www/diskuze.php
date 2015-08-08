@@ -198,8 +198,27 @@ $template['errors'] = array_merge($template['errors'], $form->getErrors());
 
 $form['captcha']->setValue(False);
 
+// posts
+//get total number
+$nPerPage = 10;
+$count = dibi::query('SELECT count([Id]) FROM [KFE_Board] WHERE [ParentId] = 0')->fetchSingle();
+$nPages = ceil($count/$nPerPage);
+
+if(isset($_GET['page'])) {
+  if(!(($_GET['page'] > 0) && ($_GET['page'] <= $nPages))) {
+    header('Location: /diskuze');
+  }
+  else {
+    $page = $_GET['page'];
+  }
+}
+else {
+  $page = 1;
+}
+$ofset = ($page - 1)*$nPerPage;
+
 // get post
-$data[0] = dibi::query('SELECT [Id], [Date], [Title], [Author], [Email], [Message] FROM [KFE_Board] WHERE [ParentId] = 0 ORDER BY [Date] DESC LIMIT 2')->fetchAll();
+$data[0] = dibi::query('SELECT [Id], [Date], [Title], [Author], [Email], [Message] FROM [KFE_Board] WHERE [ParentId] = 0 ORDER BY [Date] DESC LIMIT %i, %i', $ofset, $nPerPage)->fetchAll();
 
 printPosts($data, 0);
 
@@ -237,6 +256,9 @@ $template['defaultValues'] = $defaultValues;
 $template['form'] = $form;
 $template['showForm'] = $showForm;
 $template['data'] = $data;
+
+$template['page'] = $page;
+$template['maxPage'] = $nPages;
 
 $latte->render('../templates/diskuze.latte', $template);
 
