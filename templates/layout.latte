@@ -90,13 +90,12 @@
     </div><!-- /.container -->
 
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
+    <!-- JavaScripts
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="./js/bootstrap.js"></script>
-    <script src="./js/netteForms.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <!--<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
+    {foreach $javascript as $js}
+      <script src="{$js['source']}" {(isset($js['async']) && ($js['async'] == True)) ? async|noescape} {(isset($js['defer']) && ($js['defer'] == True)) ? defer|noescape}></script>
+    {/foreach}
   </body>
 </html>

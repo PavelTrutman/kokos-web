@@ -14,6 +14,9 @@
   $template['errors'] = array();
   $template['successes'] = array();
 
+  // javascripts
+  $template['javascript'] = array();
+
   // menu
   $template['menu'] = array(
 
