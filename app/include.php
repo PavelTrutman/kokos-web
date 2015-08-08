@@ -10,6 +10,10 @@
   $latte = new Latte\Engine;
   $latte->setTempDirectory('../tmp');
 
+  // errors and successes to the template
+  $template['errors'] = array();
+  $template['successes'] = array();
+
   // menu
   $template['menu'] = array(
 
