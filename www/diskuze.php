@@ -113,7 +113,7 @@ foreach ($form->getControls() as $control) {
 }
 
 $defaultValues = array(
-  'parent' => '',
+  'parent' => 'zero',
   'name' => '',
   'email' => '',
   'headline' => '',

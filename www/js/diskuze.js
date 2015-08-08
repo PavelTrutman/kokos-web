@@ -19,6 +19,29 @@ function loadPostCaptcha() {
     id = parseInt(formId.substring(5));
     cId = loadCaptcha('captcha-post');
     captchaId[cId] = id;
-    console.log(captchaId);
   }
 };
+
+function showForm(id) {
+  if($('#well-' + id).length == 0) {
+    newForm = formHtml.replace(/zero/g, id);
+    if(id == 0) {
+      $('#placeholder-form-0').after(newForm);
+      $('#placeholder-form-0').remove();
+    }
+    else {
+      $('#post-' + id).after(newForm);
+    }
+    cId = loadCaptcha('captcha-' + id);
+    captchaId[cId] = id;
+  }
+  else {
+    $('#well-' + id).removeClass('hidden');
+  }
+  $('#button-' + id).addClass('hidden');
+}
+
+function hideForm(id) {
+  $('#well-' + id).addClass('hidden');
+  $('#button-' + id).removeClass('hidden');
+}
