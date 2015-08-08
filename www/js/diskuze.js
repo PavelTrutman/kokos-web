@@ -3,12 +3,8 @@ var captchaId = [];
 function loadCaptcha(element) {
   cId = grecaptcha.render(element, {
     'sitekey' : '6LeGrgoTAAAAADcm2eibbollw7PzMHt14nPu6Npi',
-    'callback' : function(response) {
-      $("#frm-captcha").prop("checked", true);
-    },
-    'expired-callback' : function() {
-      $("#frm-captcha").prop("checked", false);
-    }
+    'callback' : captchaCallback,
+    'expired-callback' : captchaCallback,
   });
   return cId;
 };
@@ -16,11 +12,27 @@ function loadCaptcha(element) {
 function loadPostCaptcha() {
   formId = $("#captcha-post").parent().parent().parent().attr('id');
   if(typeof formId !== "undefined") {
-    id = parseInt(formId.substring(5));
     cId = loadCaptcha('captcha-post');
-    captchaId[cId] = id;
+    captchaId[cId] = 'post';
   }
 };
+
+function captchaCallback() {
+  for(var cId in captchaId) {
+    if(captchaId[cId] == 'post') {
+      id = '#frm-captcha';
+    }
+    else {
+      id = '#frm-captcha-' + captchaId[cId];
+    }
+    if(grecaptcha.getResponse(cId) != '') {
+      $(id).prop("checked", true);
+    }
+    else {
+      $(id).prop("checked", false);
+    }
+  }
+}
 
 function showForm(id) {
   if($('#well-' + id).length == 0) {
