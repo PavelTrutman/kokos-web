@@ -39,6 +39,7 @@ function showForm(id) {
     $('#well-' + id).removeClass('hidden');
   }
   $('#button-' + id).addClass('hidden');
+  Nette.initForm(document.getElementById('form-' + id));
 }
 
 function hideForm(id) {
