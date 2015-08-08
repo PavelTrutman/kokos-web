@@ -33,3 +33,11 @@
 .diskuze textarea {
   height: 200px;
 }
+
+.diskuze button#button-0 {
+  margin-bottom: 20px;
+}
+
+.diskuze .panel-footer .btn {
+  margin-top: -5px;
+}

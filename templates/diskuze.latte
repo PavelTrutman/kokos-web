@@ -3,7 +3,7 @@
 {block #content}
 
 {define #form}
-  <div class="well">
+  <div class="well" id="well-{$captchaId}">
 
     {$form->render('begin')}
 
@@ -73,6 +73,8 @@
         <strong>{$view['name']}</strong><em class="email">{$view['email']}</em>
       </div>
     </div>
+    
+    <p class="text-right"><button id="button-hide-{$captchaId}" class="{($captchaId == 'post') ? hidden} btn btn-primary" role="button" onclick="hideForm({$captchaId})"><span class="fa fa-chevron-up"></span>&nbsp;Skrýt formulář</button></p>
 
    </div>
 {/define}
@@ -83,11 +85,11 @@
   <div class="diskuze">
 
   {* show form? *}
-  {ifset $showForm[0]}
-    {if $showForm[0] == True}
-      {include form, $view = $viewData}
-    {/if}
-  {/ifset}
+  {if isset($showForm[0]) &&($showForm[0] == True)}
+    {include form, $view = $viewData, $captchaId = 'post'}
+  {else}
+    <button id="button-0" class="btn btn-primary" role="button" onclick="showForm(0)"><span class="fa fa-comment"></span>&nbsp;Napsat příspěvek</button>
+  {/if}
 
   {var $id = 0}
   {var $level = 0}
@@ -103,6 +105,9 @@
           {$post['Message']|noescape}
         </div>
         <div class="panel-footer">
+          {if !(isset($showForm[$post['Id']]) &&($showForm[$post['Id']] == True))}
+            <button id="button-{$post['Id']}" class="btn btn-primary btn-sm pull-right" role="button" onclick="showForm({$post['Id']})"><span class="fa fa-reply"></span>&nbsp;Odpovědět příspěvek</button>
+          {/if}
           <strong>{$post['Author']}</strong><em class="email">{$post['Email']}</em>
         </div>
       </div>
@@ -121,25 +126,14 @@
   {/block}
 
   {* empty form *}
-  {php resetForm($form, $defaultValues)}
-  {include form, $curForm = $form, $view = $defaultViewData, $captchaId = 'zero'}
+  {capture $formHtml}
+    {php resetForm($form, $defaultValues)}
+    {include form, $view = $defaultViewData, $captchaId = 'zero'}
+  {/capture}
+  <script type="text/javascript">
+    var formHtml = {$formHtml};
+  </script>
 
   </div>
 
-  {*
-  <script type='text/javascript'>
-    var captchaContainer = null;
-    var loadCaptcha = function() {l}
-      captchaContainer = grecaptcha.render('captcha', {l}
-        'sitekey' : '6LeGrgoTAAAAADcm2eibbollw7PzMHt14nPu6Npi',
-        'callback' : function(response) {l}
-          $("#frm-captcha").prop("checked", true);
-        {r},
-        'expired-callback' : function() {l}
-          $("#frm-captcha").prop("checked", false);
-        {r}
-      {r});
-    {r};
-  </script>
-  *}
 {/block}
