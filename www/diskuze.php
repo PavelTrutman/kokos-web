@@ -24,6 +24,8 @@ P.S. A dělejte taky častěji soustředění, jsou totiž super!',
 );
 $viewData = $formVals;
 
+$showForm = array();
+
 $form = new Form;
 $form->addSubmit('send', 'send')
   ->getControlPrototype()
@@ -97,15 +99,31 @@ foreach ($form->getControls() as $control) {
   }
 }
 
+$defaultValues = array(
+  'parent' => '',
+  'name' => '',
+  'email' => '',
+  'headline' => '',
+  'text' => '',
+  'agree' => False,
+  'captcha' => False,
+);
+
 // send form parsing
 if ($form->isSuccess()) {
   $gotValues = $form->getValues(True);
   if($form['view']->submittedBy) {
-    $viewData = array();
-    $viewData['name'] = $gotValues['name'] != '' ? $gotValues['name'] : '???';
-    $viewData['email'] = $gotValues['email'] != '' ? $gotValues['email'] : '???';
-    $viewData['headline'] = $gotValues['headline'] != '' ? $gotValues['headline'] : '???';
-    $viewData['text'] = $gotValues['text'];
+    if(($gotValues['parent'] === '0') || count(dibi::query('SELECT [Id] FROM [KFE_Board] WHERE [Id] = %i', $gotValues['parent'])) > 0) {
+      $showForm[$gotValues['parent']] = True;
+      $viewData = array();
+      $viewData['name'] = $gotValues['name'] != '' ? $gotValues['name'] : '???';
+      $viewData['email'] = $gotValues['email'] != '' ? $gotValues['email'] : '???';
+      $viewData['headline'] = $gotValues['headline'] != '' ? $gotValues['headline'] : '???';
+      $viewData['text'] = $gotValues['text'];
+    }
+    else {
+      $form->addError('Formulář nebyl korektně vyplněn. Zkus stránku znovu načíst a formulář odeslat znovu.');
+    }
   }
   elseif($form['send']) {
     // check google captcha
@@ -116,7 +134,18 @@ if ($form->isSuccess()) {
       $recaptchaResponse = $httpData['g-recaptcha-response'];
       $recaptcha = $recaptcha->verify($httpData['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
       if($recaptcha->isSuccess()) {
-
+        // check parentId, must exists
+        if(($gotValues['parent'] === '0') || count(dibi::query('SELECT [Id] FROM [KFE_Board] WHERE [Id] = %i', $gotValues['parent'])) > 0) {
+          if(dibi::query('INSERT INTO [KFE_Board] ([ParentId], [Date], [Title], [Author], [Email], [ShowEmail], [Message], [Agent]) VALUES (%i, %t, %s, %s, %s, %b, %s, %s)', $gotValues['parent'], time(), $gotValues['headline'], $gotValues['name'], $gotValues['email'], 1, $gotValues['text'], $_SERVER['HTTP_USER_AGENT'])) {
+            $template['successes'][] = 'Tak a je to. Tvůj příspěvěk byl zveřejněn.';
+          }
+          else {
+            $form->addError('Odeslání formuláře se nezdařilo. Zkus to prosím za chvíli znovu.');
+          }
+        }
+        else {
+          $form->addError('Formulář nebyl korektně vyplněn. Zkus stránku znovu načíst a formulář odeslat znovu.');
+        }
       }
       else {
         $form->addError('Špatně jsi vyplnil captchu. Zkus to znovu.');
@@ -128,18 +157,19 @@ if ($form->isSuccess()) {
   }
 }
 
+$template['errors'] = array_merge($template['errors'], $form->getErrors());
 
-// set defaul values 
-$form['captcha']->setValue(FALSE);
+$form['captcha']->setValue(False);
 
-$data[0] = dibi::query('SELECT [Id], [Date], [Title], [Author], [Email], [Message] FROM [KFE_Board] WHERE [ParentId] = 0 ORDER BY [Date] DESC')->fetchAll();
+// get post
+$data[0] = dibi::query('SELECT [Id], [Date], [Title], [Author], [Email], [Message] FROM [KFE_Board] WHERE [ParentId] = 0 ORDER BY [Date] DESC LIMIT 2')->fetchAll();
 
 printPosts($data, 0);
 
 
 function printPosts(&$data, $id) {
   foreach ($data[$id] as $post) {
-    $innerData = dibi::query('SELECT [Id], [Date], [Title], [Author], [Email], [Message] FROM [KFE_Board] WHERE [ParentId] = %i ORDER BY [Date] DESC', $post['Id']);
+    $innerData = dibi::query('SELECT [Id], [Date], [Title], [Author], [Email], [Message] FROM [KFE_Board] WHERE [ParentId] = %i ORDER BY [Date] ASC', $post['Id']);
     if (count($innerData) != 0) {
       $data[$post['Id']] = $innerData->fetchAll();
       printPosts($data, $post['Id']);
@@ -147,12 +177,30 @@ function printPosts(&$data, $id) {
   }
 }
 
+function resetForm($form, $defaultValues) {
+  $form['parent']->setValue($defaultValues['parent']);
+  $form['name']->setValue($defaultValues['name']);
+  $form['email']->setValue($defaultValues['email']);
+  $form['headline']->setValue($defaultValues['headline']);
+  $form['text']->setValue($defaultValues['text']);
+  $form['agree']->setValue($defaultValues['agree']);
+  $form['captcha']->setValue($defaultValues['captcha']);
+}
+
 $texy = new Texy();
 TexyConfigurator::safeMode($texy);
 
+$defaultViewData = $formVals;
+$defaultViewData['html'] = $texy->process($defaultViewData['text']);
+$template['defaultViewData'] = $defaultViewData;
+
 $viewData['html'] = $texy->process($viewData['text']);
-$template['form'] = $form;
 $template['viewData'] = $viewData;
+
+$template['defaultValues'] = $defaultValues;
+
+$template['form'] = $form;
+$template['showForm'] = $showForm;
 $template['data'] = $data;
 
 $latte->render('../templates/diskuze.latte', $template);
