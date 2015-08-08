@@ -11,6 +11,7 @@ RewriteRule ^serie/([0-9]*)$ /serie-download.php?id=$1 [R]
 RewriteRule ^vysledky/([0-9]*)$ /vysledky.php?id=$1 [R]
 RewriteRule ^vysledky/([0-9]*)/([0-9]*)$ /vysledky.php?id=$1&grade=$2 [R]
 RewriteRule ^diskuze$ /diskuze.php [R]
+RewriteRule ^diskuze/([0-9]*)$ /diskuze.php?page=$1 [R]
 
 <filesMatch "\.(php|html|htm|js|css)$">
   FileETag None

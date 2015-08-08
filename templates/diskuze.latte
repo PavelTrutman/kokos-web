@@ -1,8 +1,97 @@
 {layout "carousel.latte"}
 
 {block #content}
+
+{define #form}
+  <div class="well" id="well-{$captchaId}">
+
+    {$form->render('begin')}
+
+    <div class="form-group hidden">
+      {$form['parent']->label}
+      <div class="col-xs-10">
+        {$form['parent']->control}
+      </div>
+    </div>
+    <div class="form-group">
+      {$form['name']->label}
+      <div class="col-xs-10">
+        {$form['name']->control}
+      </div>
+    </div>
+    <div class="form-group">
+      {$form['email']->label}
+      <div class="col-xs-10">
+        {$form['email']->control}
+      </div>
+    </div>
+    <div class="form-group">
+      {$form['headline']->label}
+      <div class="col-xs-10">
+        {$form['headline']->control}
+      </div>
+    </div>
+    <div class="form-group">
+      {$form['text']->label}
+      <div class="col-xs-10">
+        {$form['text']->control}
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-xs-offset-2 col-xs-10">
+        {$form['agree']->control}
+      </div>
+    </div>
+    <div class="form-group hidden">
+      <div class="col-xs-offset-2 col-xs-10">
+        {$form['captcha']->control}
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-xs-offset-2 col-xs-10">
+        <div id="captcha-{$captchaId}"></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-xs-offset-2 col-xs-10">
+        {$form['send']->control}
+        {$form['view']->control}
+      </div>
+    </div>
+
+    {$form->render('end')}
+
+    <h3>Náhled</h3>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2 class="panel-title">{$view['headline']}</h2><span class="date"><em>Odesláno dne {date('j. n. Y v G:i')}</em></span>
+      </div>
+      <div class="panel-body">
+        {$view['html']|noescape}
+      </div>
+      <div class="panel-footer">
+        <strong>{$view['name']}</strong><em class="email">{$view['email']}</em>
+      </div>
+    </div>
+    
+    <p class="text-right"><button id="button-hide-{$captchaId}" class="{($captchaId == 'post') ? hidden} btn btn-primary" role="button" onclick="hideForm({$captchaId})"><span class="fa fa-chevron-up"></span>&nbsp;Skrýt formulář</button></p>
+
+   </div>
+{/define}
+
+
 <h1>Diskuze</h1>
+
   <div class="diskuze">
+
+  {* show form? *}
+  {if isset($showForm[0]) &&($showForm[0] == True)}
+    {include form, $view = $viewData, $captchaId = 'post'}
+  {else}
+    <button id="button-0" class="btn btn-primary" role="button" onclick="showForm(0)"><span class="fa fa-comment"></span>&nbsp;Napsat příspěvek</button>
+  {/if}
+
+  <div id="placeholder-form-0"></div>
 
   {var $id = 0}
   {var $level = 0}
@@ -10,7 +99,7 @@
   {block #item}
     {var $innerLevel = $level}
     {foreach $data[$id] as $post}
-      <div class="panel panel-default" id="{$post['Id']}" style="margin-left: {$innerLevel*50}px">
+      <div class="panel panel-default" id="post-{$post['Id']}" style="margin-left: {$innerLevel*50}px">
         <div class="panel-heading">
           <h2 class="panel-title">{$post['Title']}</h2><span class="date"><em>Odesláno dne {date('j. n. Y v G:i', strtotime($post['Date']))}</em></span>
         </div>
@@ -18,14 +107,49 @@
           {$post['Message']|noescape}
         </div>
         <div class="panel-footer">
+          {if !(isset($showForm[$post['Id']]) &&($showForm[$post['Id']] == True))}
+            <button id="button-{$post['Id']}" class="btn btn-primary btn-sm pull-right" role="button" onclick="showForm({$post['Id']})"><span class="fa fa-reply"></span>&nbsp;Odpovědět na příspěvek</button>
+          {/if}
           <strong>{$post['Author']}</strong><em class="email">{$post['Email']}</em>
-          </div>
+        </div>
       </div>
+
+      {* show form? *}
+      {ifset $showForm[$post['Id']]}
+        {if $showForm[$post['Id']] == True}
+          {include form, $view = $viewData, $captchaId = 'post'}
+        {/if}
+      {/ifset}
+
       {ifset $data[$post['Id']]}
         {include #item, $id = $post['Id'], $level = $innerLevel + 1}
       {/ifset}
     {/foreach}
   {/block}
 
+  <nav>
+    <div class="text-center">
+      <ul class="pagination">
+
+      <li n:class="$page == 1 ? disabled"><a href="{($page != 1) ? '/diskuze/' . ($page - 1)}" aria-label="Previous"><span class="fa fa-angle-double-left" aria-hidden="true"></span></a></li>
+      {for $i = 1; $i <= $maxPage; $i++}
+        <li n:class="$page == $i ? active"><a href="/diskuze/{$i}">{$i}</a></li>
+      {/for}
+      <li n:class="$page == $maxPage ? disabled"><a href="{($page != $maxPage) ? '/diskuze/' . ($page + 1)}" aria-label="Next"><span class="fa fa-angle-double-right" aria-hidden="true"></span></a></li>
+
+      </ul>
+    </div>
+  </nav>
+
+  {* empty form *}
+  {capture $formHtml}
+    {php resetForm($form, $defaultValues)}
+    {include form, $view = $defaultViewData, $captchaId = 'zero'}
+  {/capture}
+  <script type="text/javascript">
+    var formHtml = {$formHtml};
+  </script>
+
   </div>
+
 {/block}

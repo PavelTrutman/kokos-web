@@ -14,3 +14,6 @@
 ### KA
   * nemazat výsledky sérií z minulých let
   * result-table: 4.-5. => 4. $ndash; 5.
+
+### Diskuze
+  * pridat link na pravidla diskuze
