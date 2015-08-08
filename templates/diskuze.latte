@@ -108,7 +108,7 @@
         </div>
         <div class="panel-footer">
           {if !(isset($showForm[$post['Id']]) &&($showForm[$post['Id']] == True))}
-            <button id="button-{$post['Id']}" class="btn btn-primary btn-sm pull-right" role="button" onclick="showForm({$post['Id']})"><span class="fa fa-reply"></span>&nbsp;Odpovědět příspěvek</button>
+            <button id="button-{$post['Id']}" class="btn btn-primary btn-sm pull-right" role="button" onclick="showForm({$post['Id']})"><span class="fa fa-reply"></span>&nbsp;Odpovědět na příspěvek</button>
           {/if}
           <strong>{$post['Author']}</strong><em class="email">{$post['Email']}</em>
         </div>
