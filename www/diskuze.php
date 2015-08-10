@@ -257,7 +257,7 @@ $template['form'] = $form;
 $template['showForm'] = $showForm;
 $template['data'] = $data;
 
-$template['page'] = $page;
+$template['curPage'] = $page;
 $template['maxPage'] = $nPages;
 
 $latte->render('../templates/diskuze.latte', $template);
