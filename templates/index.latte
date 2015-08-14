@@ -1,0 +1,95 @@
+{layout "carousel.latte"}
+
+{block #content}
+
+  {* Three columns below *}
+
+  <div class="row">
+    <div class="col-lg-4">
+      <h2>Nový v KoKoSu?</h2>
+      <p>Tak neváhej a začni řešit nejnovější sérii příkladů. Aby jsi mohl vyřešené příklady odevzdat, je ale třeba, aby jsi se zaregistroval. Ale neboj, je to jenom chvilka, zato potom ti budou chodit nové série poštou rovnou k tobě domů!</p>
+      <p><a class="btn btn-default" href="#" role="button"><span class="fa fa-user-plus"></span>&nbsp;Zaregistrovat se</a></p>
+    </div>
+
+
+    <div class="col-lg-4">
+      <h2>Nejnovější série</h2>
+      <p>Stáhni si nejnovější sérii příkladů a začni ihned s&nbsp;jejich řešením. Určitě si s tím hravě poradíš. Tvoje řešení zadaných příkladů očekáváme do <b><?php echo $lastSerieDate ?></b>. Tak rychle, ať to stihneš!</p>
+      <p><a class="btn btn-default" href="./serie/{$lastSerie}" role="button"><span class="fa fa-download"></span>&nbsp;Stáhnout sérii</a></p>
+    </div>
+
+    <div class="col-lg-4">
+      <h2>Soustředění</h2>
+      <p>Párkrát do roka se taky můžeš zúčastnit soustředění. Na tom si v první řadě užiješ spoustu zábavy, ale taky se přiučíš pár vědomostem, které tě třeba ve škole nikdo nenaučí. Čeká tě spousta her, při kterých se nudit určitě nebudeš. Zjisti si tedy, kdy se pořádá další soustředění a včas se přihlaš!</p>
+      <p><a class="btn btn-default" href="#" role="button"><span class="fa fa-child"></span>&nbsp;Soustředění</a></p>
+    </div>
+  </div>
+
+
+  {* Features *}
+
+  <hr class="featurette-divider">
+
+  <div class="row featurette">
+    <div class="col-md-7">
+      <h2 class="featurette-heading">O co jde? <small>O matematiku.</small></h2>
+      <p class="lead">Koperníkův Korespondenční Seminář (zkráceně KoKoS) je matematický seminář pro žáky 6. – 9. tříd základních škol nebo odpovídajících ročníků gymnázií. Za cíl si klade rozvíjet mladé žáky, kteří mají zájem o matematiku a logické myšlení a naučit je něco nového nad rámec standardní výuky ve škole.</p>
+    </div>
+    <div class="col-md-5">
+      <img class="featurette-image img-responsive center-block" src="./images/OCoJde.jpg" alt="O co jde?" title="O co jde?">
+    </div>
+  </div>
+
+  <hr class="featurette-divider">
+
+  <div class="row featurette">
+    <div class="col-md-7 col-md-push-5">
+      <h2 class="featurette-heading">Kdo jsme? <small>Nadšení studenti.</small></h2>
+      <p class="lead">Jsme studenti <a href="http://www.gmk.cz">Gymnázia Mikuláše Koperníka</a> v Bílovci. A protože nás baví matematika a máme spoustu volného času, organizujeme tento seminář. Moc nás to baví, potkáváme nové lidi a hlavně nám to přináší nové nečekané zkušenosti.</p>
+    </div>
+    <div class="col-md-5 col-md-pull-7">
+      <img class="featurette-image img-responsive center-block" src="./images/KdoJsme.jpg" alt="Kdo jsme?" title="Kdo jsme?">
+    </div>
+  </div>
+
+  <hr class="featurette-divider">
+
+  <div class="row featurette">
+    <div class="col-md-7">
+      <h2 class="featurette-heading">Kde nás najdeš? <small>V Bílovci.</small></h2>
+      <p class="lead">Kontaktní adresa:</p>
+      <div style="margin: -10px 0 0 10px"><p>KoKoS<br>
+        Gymnázium Mikuláše Koperníka<br>
+        17. listopadu 526<br>
+        743 11 Bílovec<br>
+      </div>
+      <p class="lead">E-mail: gmkkokos@seznam.cz<br>
+      Telefon: 732 642 779 (Tomáš Chrobák)</p>
+    </div>
+    <div class="col-md-5" id="map-canvas" style="height: 400px"></div>
+  </div>
+
+  <hr class="featurette-divider">
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcu-kTf8feRx4TbbGa9VX70uU7AAiceCg"></script>
+  <script>
+    var map;
+    function initialize() {l}
+      map = new google.maps.Map(document.getElementById('map-canvas'), {l}
+        zoom: 14,
+        center: {l}lat: 49.759350, lng: 18.018819{r}
+      {r});
+
+      var gmk = new google.maps.LatLng(49.759350, 18.018819);
+      new google.maps.Marker({l}
+        position: gmk,
+        map: map,
+        title: 'Gymnázium Mikuláše Koperníka'
+      {r});
+    {r}
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+  </script>
+
+{/block}
