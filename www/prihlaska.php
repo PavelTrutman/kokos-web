@@ -26,13 +26,50 @@ $form->addText('name', 'Jméno:')
 
 $form->addText('surname', 'Přijmení:')
   ->setAttribute('placeholder', '')
-  ->addRule(Form::MAX_LENGTH, 'S tou délkou jména to zas tak nepřeháněj. %d znaků ti nestačí?', 40)
-  ->setRequired('Zadej prosím svoje jméno, ať víme, kdo jsi.');
+  ->addRule(Form::MAX_LENGTH, 'S tou délkou příjmení to zas tak nepřeháněj. %d znaků ti nestačí?', 40)
+  ->setRequired('Zadej prosím svoje příjmení, ať víme, kdo jsi.');
 
 $form->addText('street', 'Ulice:')
   ->setAttribute('placeholder', '')
   ->addRule(Form::MAX_LENGTH, 'S tou délkou názvu ulice to zas tak nepřeháněj. %d znaků ti nestačí?', 40)
   ->setRequired('Vyplň prosím jméno ulice, na které bydlíš, ať víme, kam ti máme posílat sérii.');
+
+$form->addText('numberO', 'Číslo orientační:')
+  ->setAttribute('placeholder', '')
+  ->addCondition(Form::FILLED)
+    ->addRule(Form::INTEGER, 'Číslo orientační musí být opravdu číslo!')
+    ->addRule(Form::MAX_LENGTH, 'Číslo orientační asi není tak dlouhé. Musí ti stačit %d znaků.', 10);
+
+$form->addText('numberD', 'Číslo popisné:')
+  ->setAttribute('placeholder', '')
+  ->addCondition(Form::FILLED)
+    ->addRule(Form::INTEGER, 'Číslo popisné musí být opravdu číslo!')
+    ->addRule(Form::MAX_LENGTH, 'Číslo popisné asi není tak dlouhé. Musí ti stačit %d znaků.', 10);
+
+$form['numberO']
+  ->addConditionOn($form['numberD'], ~Form::FILLED)
+    ->setRequired('Vyplň prosím orientační číslo, ať víme, kam ti máme posílat sérii.');
+
+$form['numberD']
+  ->addConditionOn($form['numberO'], ~Form::FILLED)
+    ->setRequired('Vyplň prosím číslo popisné, ať víme, kam ti máme posílat sérii.');
+
+$form->addText('city', 'Město:')
+  ->setAttribute('placeholder', '')
+  ->addRule(Form::MAX_LENGTH, 'S tou délkou názvu města to zas tak nepřeháněj. %d znaků ti nestačí?', 40)
+  ->setRequired('Vyplň prosím město, ve kterém bydlíš, ať víme, kam ti máme posílat sérii.');
+
+$form->addText('zip', 'PSČ:')
+  ->setAttribute('placeholder', '')
+  ->addRule(Form::INTEGER, 'PSČ musí být číslo!')
+  ->addRule(Form::LENGTH, 'PSČ musí mít právě %d znaků.', 5)
+  ->setRequired('Vyplň prosím svoje PSČ, ať víme, kam ti máme posílat sérii.');
+
+$form->addText('phone', 'Telefon:')
+  ->setAttribute('placeholder', '')
+  ->addRule(Form::LENGTH, 'Telefonní číslo musí mít právě %d znaků.', 9)
+  ->addRule(Form::INTEGER, 'Telefonní číslo musí být opravdu číslo.')
+  ->setRequired('Zadej prosím svůje telefonní číslo, ať tě kdyžtak můžeme kontaktovat přímo.');
 
 $form->addText('email', 'E-mail:')
   ->setAttribute('placeholder', '')
