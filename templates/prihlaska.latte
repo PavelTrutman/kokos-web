@@ -101,7 +101,7 @@
       </div>
       <div class="form-group">
         <div class="col-xs-offset-2 col-xs-10">
-          <div id="captcha-{$captchaId}"></div>
+          <div id="captcha"></div>
         </div>
       </div>
       <div class="form-group">
@@ -114,7 +114,27 @@
 
     {$form->render('end')}
 
-   </div>
+  </div>
+
+    <script type="text/javascript">
+     function loadCaptcha() {l}
+       cId = grecaptcha.render('captcha', {l}
+           'sitekey' : '6LeGrgoTAAAAADcm2eibbollw7PzMHt14nPu6Npi',
+           'callback' : captchaCallback,
+           'expired-callback' : captchaCallbackExpired,
+           {r});
+       return cId;
+     {r};
+
+
+      function captchaCallback() {l}
+            $('#frm-captcha').prop("checked", true);
+      {r}
+
+      function captchaCallbackExpired() {l}
+            $('#frm-captcha').prop("checked", false);
+      {r}
+    </script>
 {/define}
 
 

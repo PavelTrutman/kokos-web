@@ -8,7 +8,7 @@
     'source' => './js/netteForms.js',
   );
   $template['javascript'][] = array(
-    'source' => 'https://www.google.com/recaptcha/api.js?onload=loadPostCaptcha&render=explicit',
+    'source' => 'https://www.google.com/recaptcha/api.js?onload=loadCaptcha&render=explicit',
     'async' => True,
     'defer' => True,
   );
@@ -114,7 +114,7 @@ $form->addCheckbox('captcha', 'Captcha.')
 $form->addSubmit('send', 'send')
   ->getControlPrototype()
     ->setName('button')
-    ->setHtml('<span class="fa fa-paper-plane"></span>&nbsp;Odeslat')
+    ->setHtml('<span class="fa fa-user-plus"></span>&nbsp;Zaregistrovat se')
     ->addClass('btn-primary');
 
 $form->getElementPrototype()->class('form-horizontal');
