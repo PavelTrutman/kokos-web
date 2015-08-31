@@ -15,6 +15,23 @@
 
 use Nette\Forms\Form;
 
+$years = array(
+  5 => '5.',
+  6 => '6.',
+  7 => '7.',
+  8 => '8.',
+  9 => '9.',
+);
+
+$shippings = array(
+  1 => 'Domů',
+  2 => 'Do školy',
+);
+
+
+$result = dibi::query('SELECT [Id], [Name], [City] FROM [KA_Schools] ORDER BY [Name] ASC');
+$schools = $result->fetchAssoc('Id');
+
 // form
 
 $form = new Form;
@@ -78,6 +95,19 @@ $form->addText('email', 'E-mail:')
   ->setRequired('Zadej prosím svůj e-mail, ať tě kdyžtak můžeme kontaktovat přímo.')
   ->addRule(Form::EMAIL, 'Asi máš chybu v e-mailu, takhle by vypadat neměl.');
 
+$form->addRadioList('year', 'Ročník ZŠ:', $years)
+  ->setRequired('Vyber svůj ročník na základní škole.')
+  ->getSeparatorPrototype()->setName(NULL);
+$form['year']->getItemLabelPrototype()->addClass('radio-inline');
+
+$form->addRadioList('shipping', 'Zasílat:', $shippings)
+  ->setRequired('Vyber si prosím, kam chceš zasílat sérii.')
+  ->getSeparatorPrototype()->setName(NULL);
+$form['shipping']->getItemLabelPrototype()->addClass('radio-inline');
+
+$form->addSelect('school', 'Škola:', array_map(function($val) {return $val['Name'] . ', ' . $val['City'];}, $schools))
+  ->setRequired('Vyber prosím svoji školu ze seznamu. Pokud jsi tam svoji školu nenašel, napiš nám a my ji do seznamu přidáme.');
+
 $form->addCheckbox('captcha', 'Captcha.')
   ->addRule(Form::EQUAL, 'Vyplň prosím captchu.', TRUE);
 
@@ -103,7 +133,14 @@ foreach ($form->getControls() as $control) {
   elseif ($control instanceof Nette\Forms\Controls\SubmitButton) {
     $control->getControlPrototype()->addClass('btn btn-default');
   }
+  elseif ($control instanceof Nette\Forms\Controls\RadioList) {
+  }
+  elseif ($control instanceof Nette\Forms\Controls\SelectBox) {
+    $control->getControlPrototype()->addClass('form-control');
+    $control->getControlPrototype()->addAttributes(array('size' => '10'));
+  }
   else {
+    var_dump($control);
   }
 }
 

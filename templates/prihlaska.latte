@@ -8,78 +8,108 @@
 {/block}
 
 {define #form}
-  <div class="well" id="well-{$captchaId}">
+  {* <div class="well" id="well-{$captchaId}">*}
 
     {$form->render('begin')}
 
-    <div class="form-group">
-      {$form['name']->label}
-      <div class="col-xs-10">
-        {$form['name']->control}
+    <div class="well">
+
+      <div class="form-group">
+        {$form['name']->label}
+        <div class="col-xs-10">
+          {$form['name']->control}
+        </div>
       </div>
+      <div class="form-group">
+        {$form['surname']->label}
+        <div class="col-xs-10">
+          {$form['surname']->control}
+        </div>
+      </div>
+      <div class="form-group">
+        {$form['street']->label}
+        <div class="col-xs-10">
+          {$form['street']->control}
+        </div>
+      </div>
+      <div class="form-group">
+        {$form['numberD']->label}
+        <div class="col-xs-10">
+          {$form['numberD']->control}
+        </div>
+      </div>
+      <div class="form-group">
+        {$form['numberO']->label}
+        <div class="col-xs-10">
+          {$form['numberO']->control}
+        </div>
+      </div>
+      <div class="form-group">
+        {$form['city']->label}
+        <div class="col-xs-10">
+          {$form['city']->control}
+        </div>
+      </div>
+      <div class="form-group">
+        {$form['zip']->label}
+        <div class="col-xs-10">
+          {$form['zip']->control}
+        </div>
+      </div>
+      <div class="form-group">
+        {$form['phone']->label}
+        <div class="col-xs-10">
+          {$form['phone']->control}
+        </div>
+      </div>
+      <div class="form-group">
+        {$form['email']->label}
+        <div class="col-xs-10">
+          {$form['email']->control}
+        </div>
+      </div>
+
     </div>
-    <div class="form-group">
-      {$form['surname']->label}
-      <div class="col-xs-10">
-        {$form['surname']->control}
+    <div class="well">
+
+      <div class="form-group">
+        {$form['year']->label}
+        <div class="col-xs-10">
+          {$form['year']->control}
+        </div>
       </div>
+      <div class="form-group">
+        {$form['shipping']->label}
+        <div class="col-xs-10">
+          {$form['shipping']->control}
+        </div>
+      </div>
+      <div class="form-group">
+        {$form['school']->label}
+        <div class="col-xs-10">
+          {$form['school']->control}
+        </div>
+      </div>
+
     </div>
-    <div class="form-group">
-      {$form['street']->label}
-      <div class="col-xs-10">
-        {$form['street']->control}
+    <div class="well">
+
+      <div class="form-group hidden">
+        <div class="col-xs-offset-2 col-xs-10">
+          {$form['captcha']->control}
+        </div>
       </div>
-    </div>
-    <div class="form-group">
-      {$form['numberD']->label}
-      <div class="col-xs-10">
-        {$form['numberD']->control}
+      <div class="form-group">
+        <div class="col-xs-offset-2 col-xs-10">
+          <div id="captcha-{$captchaId}"></div>
+        </div>
       </div>
-    </div>
-    <div class="form-group">
-      {$form['numberO']->label}
-      <div class="col-xs-10">
-        {$form['numberO']->control}
+      <div class="form-group">
+        <div class="col-xs-offset-2 col-xs-10">
+          {$form['send']->control}
+        </div>
       </div>
-    </div>
-    <div class="form-group">
-      {$form['city']->label}
-      <div class="col-xs-10">
-        {$form['city']->control}
-      </div>
-    </div>
-    <div class="form-group">
-      {$form['zip']->label}
-      <div class="col-xs-10">
-        {$form['zip']->control}
-      </div>
-    </div>
-    <div class="form-group">
-      {$form['phone']->label}
-      <div class="col-xs-10">
-        {$form['phone']->control}
-      </div>
-    </div>
-    <div class="form-group">
-      {$form['email']->label}
-      <div class="col-xs-10">
-        {$form['email']->control}
-      </div>
-    </div>
-    <div class="form-group hidden">
-      <div class="col-xs-offset-2 col-xs-10">
-        {$form['captcha']->control}
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="col-xs-offset-2 col-xs-10">
-        <div id="captcha-{$captchaId}"></div>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="col-xs-offset-2 col-xs-10">
-        {$form['send']->control}
-      </div>
+
     </div>
 
     {$form->render('end')}
