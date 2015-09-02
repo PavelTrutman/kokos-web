@@ -117,6 +117,8 @@ $form->addSubmit('send', 'send')
     ->setHtml('<span class="fa fa-user-plus"></span>&nbsp;Zaregistrovat se')
     ->addClass('btn-primary');
 
+Nette\Forms\Rules::$defaultMessages[':selectBoxValid'] = 'Vybral jsi školu, která neexistuje. Tak si vyber tu správnou.';
+
 $form->getElementPrototype()->class('form-horizontal');
 $form->getElementPrototype()->role('form');
 
@@ -140,73 +142,103 @@ foreach ($form->getControls() as $control) {
     $control->getControlPrototype()->addAttributes(array('size' => '10'));
   }
   else {
-    var_dump($control);
   }
 }
-
-$defaultValues = array(
-  'name' => '',
-  'email' => '',
-  'headline' => '',
-  'text' => '',
-  'agree' => False,
-  'captcha' => False,
-);
 
 // send form parsing
 if ($form->isSuccess()) {
   $gotValues = $form->getValues(True);
-  if($form['view']->submittedBy) {
-    if(($gotValues['parent'] === '0') || count(dibi::query('SELECT [Id] FROM [KFE_Board] WHERE [Id] = %i', $gotValues['parent'])) > 0) {
-      $showForm[$gotValues['parent']] = True;
-      $viewData = formPreview($form, $gotValues);
-    }
-    else {
-      $form->addError('Formulář nebyl korektně vyplněn. Zkus stránku znovu načíst a formulář odeslat znovu.');
-    }
-  }
-  elseif($form['send']) {
-    // check google captcha
-    $gotValues = $form->getValues(True);
-    $recaptcha = new \ReCaptcha\ReCaptcha("6LeGrgoTAAAAAAkVNJNQSyCEySeO2Hs7bAu4z7bw");
-    $httpData = $form->getHttpData();
-    if(isset($httpData['g-recaptcha-response']) && $httpData['g-recaptcha-response'] != '') {
-      $recaptchaResponse = $httpData['g-recaptcha-response'];
-      $recaptcha = $recaptcha->verify($httpData['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
-      if($recaptcha->isSuccess()) {
-        // check parentId, must exists
-        if(($gotValues['parent'] === '0') || count(dibi::query('SELECT [Id] FROM [KFE_Board] WHERE [Id] = %i', $gotValues['parent'])) > 0) {
-          if(dibi::query('INSERT INTO [KFE_Board] ([ParentId], [Date], [Title], [Author], [Email], [ShowEmail], [Message], [Agent]) VALUES (%i, %t, %s, %s, %s, %b, %s, %s)', $gotValues['parent'], time(), $gotValues['headline'], $gotValues['name'], $gotValues['email'], 1, $texy->process($gotValues['text']), $_SERVER['HTTP_USER_AGENT'])) {
-            $template['successes'][] = 'Tak a je to. Tvůj příspěvěk byl zveřejněn.';
-          }
-          else {
-            $form->addError('Odeslání formuláře se nezdařilo. Zkus to prosím za chvíli znovu.');
-            $showForm[$gotValues['parent']] = True;
-            $viewData = formPreview($form, $gotValues);
-          }
+
+  // check google captcha
+  $recaptcha = new \ReCaptcha\ReCaptcha("6LeGrgoTAAAAAAkVNJNQSyCEySeO2Hs7bAu4z7bw");
+  $httpData = $form->getHttpData();
+  if(isset($httpData['g-recaptcha-response']) && $httpData['g-recaptcha-response'] != '') {
+    $recaptchaResponse = $httpData['g-recaptcha-response'];
+    $recaptcha = $recaptcha->verify($httpData['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
+    if($recaptcha->isSuccess()) {
+      // check e-mail, must not exists
+      if(count(dibi::query('SELECT [Id] FROM [KA_Competitors] WHERE [Email] = %s', $gotValues['email'])) == 0) {
+
+        // prepare and insert new competitor
+        $toDB['Name'] = $gotValues['name'];
+        $toDB['Surname'] = $gotValues['surname'];
+        $toDB['Street'] = $gotValues['street'];
+        $toDB['NumberO'] = $gotValues['numberO'];
+        $toDB['NumberD'] = $gotValues['numberD'];
+        $toDB['City'] = $gotValues['city'];
+        $toDB['ZipCode'] = $gotValues['zip'];
+        $toDB['ZipCode'] = $gotValues['zip'];
+        $toDB['Grade'] = $gotValues['year'];
+        $toDB['SchoolId'] = $gotValues['school'];
+        $toDB['Shipping'] = $gotValues['shipping'];
+        $toDB['Phone'] = $gotValues['phone'];
+        $toDB['Email'] = $gotValues['email'];
+        $pass = substr(md5(rand().rand()), 0, 10);
+        $toDB['Pass'] = sha1($pass);
+        $toDB['Approved'] = 0;
+        $toDB['CreatedBy'] = 'self';
+        $toDB['CreatedDateTime'] = date('Y-m-d H:i:s');
+        $toDB['LastUpdatedBy'] = 'self';
+        $toDB['LastUpdatedDateTime'] = $toDB['CreatedDateTime'];
+
+        if(dibi::query('INSERT INTO [KA_Competitors]', $toDB)) {
+          // send mail
+          $to = $toDB['Email'];
+          $subject = "KoKoS: Registrace do semináře";
+                     
+          $message = '<img style="float: right; margin-left: 20px" src="http://kokos.gmk.cz/images/logo.png">
+                      <p>Milý řešiteli, </p>
+                      <p style="text-align: justify;">vítej v KoKoSu! Právě jsi se přihlásil do <b>Koperníkova Korespondenčního Semináře</b>. Po přihlášení ke svému účtu na adrese <a href="http://kokos.gmk.cz/login">kokos.gmk.cz/login</a> můžeš jednoduše sledovat, jak si v semináři vedeš, kolik bodů jsi dostal a novinkou tohoto roku je: <b>odesílání řešení elektronicky</b>, tedy již žádné cesty na poštu!</p>
+                      <p>Tvé přihlašovací údaje jsou:</p>
+                      <table style="margin-left: 20px;">
+                        <tr>
+                          <th style="text-align: right">Jméno:</th><td>'  . $toDB['Name'] .  '</td>
+                        </tr>
+                        <tr>
+                          <th style="text-align: right">Příjmení:</th><td>'  . $toDB['Surname'] .  '</td>
+                        </tr>
+                        <tr>
+                          <th style="text-align: right">E-mail:</th><td><a href="mailto:' . $toDB['Email'] . '">' . $toDB['Email'] . '</td>
+                        </tr>
+                        <tr>
+                          <th style="text-align: right">Heslo:</th><td>'  . $pass .  '</td>
+                        </tr>
+                      </table>
+                      <p style="text-align: justify;">Všechny své údaje si můžeš po přihlášení změnit. Kdyby jsi si nevěděl s něčím rady, všechny potřebné informace najdeš na našem webu <a href="http://kokos.gmk.cz">kokos.gmk.cz</a> nebo nám zkrátka napiš e-mail na adresu <a href="mailto:gmkkokos@seznam.cz">gmkkokos@seznam.cz</a>.</p>
+                      <p style="text-align: justify;">Ať se ti daří nejen v KoKoSe přejí<br><span style="float: right; font-style: oblique;">Organizátoři</span></p><br>
+                      <hr>
+                      <p style="color: grey">Na tento e-mail neodpovídej, jde pouze o automaticky vygenerovanou zprávu o novém účtu.</p>';
+
+          $additional_headers = "MIME-Version: 1.0" . "\r\n";
+          $additional_headers .= "Content-type: text/html; charset=UTF-8" . "\r\n";
+          $additional_headers .= "From: KoKoS <no-reply@kokos.gmk.cz>" . "\r\n";
+          $additional_headers .= "X-Sender: <no-reply@kokos.gmk.cz>\r\n";
+          $additional_headers .= "Reply-To: KoKoS <gmkkokos@seznam.cz>\r\n";
+          $additional_headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
+          $additional_headers .= "X-Priority: 2 (Normal)\r\n";
+          $additional_headers .= "Return-Path: <gmkkokos@seznam.cz>\r\n";
+
+          mail($to, '=?UTF-8?B?'.base64_encode($subject).'?=', $message, $additional_headers);
+
+          $template['data'] = $toDB;
+          $template['successes'][] = 'Byl jsi úspěšně zaregistrován do semináře!';
+          $latte->render('../templates/prihlaska-sent.latte', $template);
+          exit(0);
         }
         else {
-          $form->addError('Formulář nebyl korektně vyplněn. Zkus stránku znovu načíst a formulář odeslat znovu.');
+          $form->addError('Odeslání formuláře se nezdařilo. Zkus to prosím za chvíli znovu.');
         }
       }
       else {
-        $form->addError('Špatně jsi vyplnil captchu. Zkus to znovu.');
-        $showForm[$gotValues['parent']] = True;
-        $viewData = formPreview($form, $gotValues);
+        $form->addError('Účet se stejným e-mailem již existuje! Místo vytvoření nového účtu použij účet stávající.');
       }
     }
     else {
-      $form->addError('Nevyplnil jsi captchu. Příště to prosím nezapomeň udělat.');
-      $showForm[$gotValues['parent']] = True;
-      $viewData = formPreview($form, $gotValues);
+      $form->addError('Špatně jsi vyplnil captchu. Zkus to znovu.');
     }
   }
-}
-else {
-  $gotValues = $form->getValues(True);
-  if(($gotValues['parent'] === '0') || count(dibi::query('SELECT [Id] FROM [KFE_Board] WHERE [Id] = %i', $gotValues['parent'])) > 0) {
-    $showForm[$gotValues['parent']] = True;
-    $viewData = formPreview($form, $gotValues);
+  else {
+    $form->addError('Nevyplnil jsi captchu. Příště to prosím nezapomeň udělat.');
   }
 }
 
@@ -214,30 +246,7 @@ $template['errors'] = array_merge($template['errors'], $form->getErrors());
 
 $form['captcha']->setValue(False);
 
-function resetForm($form, $defaultValues) {
-  $form['parent']->setValue($defaultValues['parent']);
-  $form['name']->setValue($defaultValues['name']);
-  $form['email']->setValue($defaultValues['email']);
-  $form['headline']->setValue($defaultValues['headline']);
-  $form['text']->setValue($defaultValues['text']);
-  $form['agree']->setValue($defaultValues['agree']);
-  $form['captcha']->setValue($defaultValues['captcha']);
-  $form->getElementPrototype()->id = 'form-zero';
-}
-
-$defaultViewData = $formVals;
-$template['defaultViewData'] = $defaultViewData;
-
-$template['viewData'] = $viewData;
-
-$template['defaultValues'] = $defaultValues;
-
 $template['form'] = $form;
-$template['showForm'] = $showForm;
-$template['data'] = $data;
-
-$template['curPage'] = $page;
-$template['maxPage'] = $nPages;
 
 $latte->render('../templates/prihlaska.latte', $template);
 

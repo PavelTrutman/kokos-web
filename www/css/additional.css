@@ -8,6 +8,10 @@
   margin: 0 5px;
 }
 
+.content {
+  margin-top: 50px;
+}
+
 .result-table th:first-letter {
   text-transform: uppercase;
 }
