@@ -1,0 +1,19 @@
+{layout "layout.latte"}
+
+{block #content}
+
+  <h1>{$data['Name']}</h1>
+
+  <p>{$data['Description']|noescape}</p>
+
+  <div class="container gallery">
+    {for $i = 0; $i < ceil(sizeof($photos)/4); $i++}
+      <div class="row">
+        {for $j = 4*$i; $j < sizeof($photos) && $j < 4*($i + 1); $j++}
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 text-center"><img height="100%" class="img-responsive center-block" src="/photo.php?galleryId={$data['Id']}&photoId={$photos[$j]['PhotoId']}&thumb=1"/>{$photos[$j]['Description']}</div>
+        {/for}
+      </div>
+    {/for}
+  </div>
+
+{/block}
