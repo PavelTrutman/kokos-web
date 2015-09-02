@@ -6,6 +6,7 @@ php_flag  log_errors on
 RewriteEngine on
 RewriteRule ^uvod$ /index.php [R]
 RewriteRule ^$ /uvod [R]
+RewriteRule ^prihlaska$ /prihlaska.php [R]
 RewriteRule ^serie$ /serie.php [R]
 RewriteRule ^serie/([0-9]*)$ /serie-download.php?id=$1 [R]
 RewriteRule ^vysledky/([0-9]*)$ /vysledky.php?id=$1 [R]
