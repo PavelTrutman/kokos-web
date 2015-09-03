@@ -8,7 +8,9 @@
     {for $i = 0; $i < 3; $i++}
       <div class="col-xs-12 col-sm-4 col-md-4">
         <div class="thumbnail">
-          <img src="/photo.php?galleryId={$galleries[$i]['Id']}&photoId=0&thumb=1" alt="{$galleries[$i]['Name']}" title="{$galleries[$i]['Name']}" class="img-responsive img-rounded">
+          <a href="/fotogalerie/{$galleries[$i]['NameWebalized']}">
+            <img src="/photo.php?galleryId={$galleries[$i]['Id']}&photoId={array_rand($photos[$galleries[$i]['Id']])}&thumb=2" alt="{$galleries[$i]['Name']}" title="{$galleries[$i]['Name']}" class="img-responsive img-rounded">
+          </a>
           <div class="caption">
             <h3>{$galleries[$i]['Name']}</h3>
             <p>{$galleries[$i]['Description']|noescape}</p>
@@ -24,7 +26,7 @@
     <div class="media">
       <div class="media-left media-middle">
         <a href="/fotogalerie/{$galleries[$i]['NameWebalized']}">
-          <img class="media-object img-rounded" src="/photo.php?galleryId={$galleries[$i]['Id']}&photoId=0&thumb=1" alt="{$galleries[$i]['Name']}" title="{$galleries[$i]['Name']}" width="300px">
+          <img class="media-object img-rounded" src="/photo.php?galleryId={$galleries[$i]['Id']}&photoId={array_rand($photos[$galleries[$i]['Id']])}&thumb=2" alt="{$galleries[$i]['Name']}" title="{$galleries[$i]['Name']}" width="200px">
         </a>
       </div>
       <div class="media-body media-middle">

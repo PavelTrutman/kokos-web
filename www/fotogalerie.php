@@ -32,7 +32,10 @@ else {
   // gallery list
   $galleries = dibi::query('SELECT [Id], [Name], [Description], [NameWebalized] FROM [KFE_Galleries] ORDER BY [Id] DESC')->fetchAll();
 
+  $photos = dibi::query('SELECT [GalleryId], [PhotoId] FROM [KFE_Photos]')->fetchAssoc('GalleryId,PhotoId,=');
+
   $template['galleries'] = $galleries;
+  $template['photos'] = $photos;
   $latte->render('../templates/fotogalerie-list.latte', $template);
 }
 
