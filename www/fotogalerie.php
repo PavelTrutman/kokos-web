@@ -15,6 +15,9 @@ if(isset($_GET['name'])) {
 
     $template['data'] = $data;
     $template['photos'] = $photos;
+    $template['javascript'][] = array(
+      'source' => './js/fotogalerie.js',
+    );
     $latte->render('../templates/fotogalerie.latte', $template);
 
   }
@@ -29,11 +32,5 @@ else {
   // gallery list
   $latte->render('../templates/fotogalerie-list.latte', $template);
 }
-
-
-/*
- header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
- die;
-*/
 
 ?>
