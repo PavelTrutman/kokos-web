@@ -1,0 +1,39 @@
+{layout "layout.latte"}
+
+{block #content}
+
+  <h1>Fotogalerie</h1>
+
+  <div class="row">
+    {for $i = 0; $i < 3; $i++}
+      <div class="col-xs-12 col-sm-4 col-md-4">
+        <div class="thumbnail">
+          <img src="/photo.php?galleryId={$galleries[$i]['Id']}&photoId=0&thumb=1" alt="{$galleries[$i]['Name']}" title="{$galleries[$i]['Name']}" class="img-responsive img-rounded">
+          <div class="caption">
+            <h3>{$galleries[$i]['Name']}</h3>
+            <p>{$galleries[$i]['Description']|noescape}</p>
+            <p><a href="/fotogalerie/{$galleries[$i]['NameWebalized']}" class="btn btn-default" role="button">Prohlédnout&nbsp;<span class="fa fa-long-arrow-right"></span></a></p>
+          </div>
+        </div>
+      </div>
+    {/for}
+  </div>
+
+  {for $i = $i; $i < count($galleries); $i++}
+    <hr>
+    <div class="media">
+      <div class="media-left media-middle">
+        <a href="/fotogalerie/{$galleries[$i]['NameWebalized']}">
+          <img class="media-object img-rounded" src="/photo.php?galleryId={$galleries[$i]['Id']}&photoId=0&thumb=1" alt="{$galleries[$i]['Name']}" title="{$galleries[$i]['Name']}" width="300px">
+        </a>
+      </div>
+      <div class="media-body media-middle">
+        <h4 class="media-heading">{$galleries[$i]['Name']}</h4>
+        <p>{$galleries[$i]['Description']|noescape}</p>
+        <p><a href="/fotogalerie/{$galleries[$i]['NameWebalized']}" class="btn btn-default" role="button">Prohlédnout&nbsp;<span class="fa fa-long-arrow-right"></span></a></p>
+      </div>
+    </div>
+  {/for}
+  <hr>
+
+{/block}

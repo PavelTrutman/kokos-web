@@ -49,3 +49,12 @@
 .gallery .row {
   padding-bottom: 10px;
 }
+
+.gallery a p {
+  color: #5a5a5a;
+  margin-top: 5px;
+}
+
+.gallery a:hover {
+  text-decoration: none;
+}

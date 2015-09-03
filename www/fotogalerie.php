@@ -30,6 +30,9 @@ else {
   $template['page'] = 'fotogalerie';
 
   // gallery list
+  $galleries = dibi::query('SELECT [Id], [Name], [Description], [NameWebalized] FROM [KFE_Galleries] ORDER BY [Id] DESC')->fetchAll();
+
+  $template['galleries'] = $galleries;
   $latte->render('../templates/fotogalerie-list.latte', $template);
 }
 

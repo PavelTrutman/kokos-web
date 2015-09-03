@@ -10,7 +10,12 @@
     {for $i = 0; $i < ceil(sizeof($photos)/4); $i++}
       <div class="row">
         {for $j = 4*$i; $j < sizeof($photos) && $j < 4*($i + 1); $j++}
-          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 text-center"><a href="#"><img height="100%" class="img-responsive img-thumbnail center-block" id="photo-{$j}" src="/photo.php?galleryId={$data['Id']}&photoId={$photos[$j]['PhotoId']}&thumb=1"/></a>{$photos[$j]['Description']}</div>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 text-center">
+            <a href="#" class="thumbnail">
+              <img height="100%" class="img-responsive img-rounded center-block" id="photo-{$j}" src="/photo.php?galleryId={$data['Id']}&photoId={$photos[$j]['PhotoId']}&thumb=1"/>
+              <p>{$photos[$j]['Description']}</p>
+            </a>
+          </div>
         {/for}
       </div>
     {/for}
