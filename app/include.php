@@ -32,6 +32,12 @@
       'glyphicon' => 'puzzle-piece',
     ),
 
+    'fotogalerie' => array(
+      'name' => 'Fotogalerie',
+      'link' => 'fotogalerie',
+      'glyphicon' => 'photo',
+    ),
+
     'diskuze' => array(
       'name' => 'Diskuze',
       'link' => 'diskuze',

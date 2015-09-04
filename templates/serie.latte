@@ -1,0 +1,32 @@
+{layout "carousel.latte"}
+
+{block #content}
+
+  <h1>Letošní série</h1>
+
+  {if $data != NULL}
+    {for $i = 0; $i < ceil(sizeof($data)/3); $i++}
+      <div class="row">
+
+        {for $j = 3*$i; $j < sizeof($data) && $j < 3*($i + 1); $j++}
+          <div class="col-lg-4">
+            <h2>{$data[$j]['Name']}</h2>
+            <p>{$data[$j]['Description']}</p>
+            <p>Nezapomeň své řešení odeslat nejpozději do <strong>{date('j. n. Y', strtotime($data[$j]['ClosureDateTime']))}</strong>.</p>
+
+            <div class="btn-group" role="group">
+              <a class="btn btn-default" href="./serie/{$data[$j]['Id']}" role="button"><span class="fa fa-download"></span>&nbsp;Stáhnout sérii</a>
+              <a n:class="btn, btn-default, $data[$j]['Results'] == 0 ? disabled" href="./vysledky/{$data[$j]['Id']}" role="button"><span class="fa fa-trophy"></span>&nbsp;Výsledky</a>
+            </div>
+
+          </div>
+        {/for}
+
+      </div>
+    {/for}
+  {else}
+    <p>Vydrž ještě chvilku. Vypadá to, že letos ještě žádná série nebyla vydána.</p>
+  {/if}
+
+
+{/block}

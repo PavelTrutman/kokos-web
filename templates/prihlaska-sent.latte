@@ -1,0 +1,21 @@
+{layout "layout.latte"}
+
+{block #content}
+
+  <p><strong>Tvoje zaregistrované údaje:</strong></p>
+  <div class="table-responsive">
+    <table class="table table-striped table-hover" style="width: auto">
+      <tbody>
+        <tr><th>Jméno a příjmení:</th><td>{$data['Name']} {$data['Surname']}</td></tr>
+        <tr><th>Adresa:</th><td>
+          {$data['Street']} {$data['NumberD']}{if $data['NumberD'] != '' && $data['NumberO'] != ''}/{/if}{$data['NumberO']}<br>
+          {$data['ZipCode']} {$data['City']}
+        </td></tr>
+        <tr><th>Telefon:</th><td>{$data['Phone']}</td></tr>
+        <tr><th>E-mail:</th><td>{$data['Email']}</td></tr>
+        <tr><th>Heslo:</th><td>Heslo obdržíš e-mailem.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+{/block}
