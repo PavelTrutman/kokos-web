@@ -29,10 +29,14 @@ if(isset($_GET['name'])) {
 else {
   $template['page'] = 'fotogalerie';
 
+  $template['javascript'][] = array(
+    'source' => './js/fotogalerie-list.js',
+  );
+
   // gallery list
   $galleries = dibi::query('SELECT [Id], [Name], [Description], [NameWebalized] FROM [KFE_Galleries] ORDER BY [Id] DESC')->fetchAll();
 
-  $photos = dibi::query('SELECT [GalleryId], [PhotoId] FROM [KFE_Photos]')->fetchAssoc('GalleryId,PhotoId,=');
+  $photos = dibi::query('SELECT [GalleryId], [PhotoId] FROM [KFE_Photos]')->fetchAssoc('GalleryId,PhotoId');
 
   $template['galleries'] = $galleries;
   $template['photos'] = $photos;

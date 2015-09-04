@@ -58,3 +58,20 @@
 .gallery a:hover {
   text-decoration: none;
 }
+
+.fader {
+  position: relative;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.fader img.top {
+  position: relative;
+  z-index: 3;
+}
+
+.fader img.bottom {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+}
