@@ -1,6 +1,4 @@
 ### Carousel
-  * zrušit slide s výsledky
-  * přidat slide s fotogalerií
 
 ### Uvod
   * link soustredeni
