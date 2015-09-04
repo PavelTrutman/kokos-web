@@ -47,7 +47,7 @@
               <ul class="nav navbar-nav">
 
                 {foreach $menu as $itemKey => $item}
-                  <li n:class="$itemKey === $page ? active"><a href={$item['link']}><span class="fa fa-lg fa-{$item['glyphicon']}"></span>&nbsp;{$item['name']}</a></li>
+                  <li n:class="$itemKey === $page ? active"><a href="/{$item['link']}"><span class="fa fa-lg fa-{$item['glyphicon']}"></span>&nbsp;{$item['name']}</a></li>
                 {/foreach}
 
               </ul>
