@@ -4,7 +4,6 @@
   * link soustredeni
 
 ### Serie
-  * archiv
 
 ### Vysledky
   * ajax
