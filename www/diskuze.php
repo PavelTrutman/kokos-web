@@ -3,7 +3,6 @@
   $template['page'] = 'diskuze';
 
   include_once('../app/include.php');
-  include_once('../app/carousel.php');
 
   $template['javascript'][] = array(
     'source' => './js/netteForms.js',

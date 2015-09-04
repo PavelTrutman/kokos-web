@@ -2,7 +2,6 @@
 $template['page'] = 'vysledky';
 
 include_once('../app/include.php');
-include_once('../app/carousel.php');
 
 if (isset($_GET['id'])) {
   $serie = $_GET['id'];
