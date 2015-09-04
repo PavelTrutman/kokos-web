@@ -8,6 +8,10 @@
   margin: 0 5px;
 }
 
+.content {
+  margin-top: 50px;
+}
+
 .result-table th:first-letter {
   text-transform: uppercase;
 }
@@ -40,4 +44,38 @@
 
 .diskuze .panel-footer .btn {
   margin-top: -5px;
+}
+
+.diskuze .popover {
+  max-width: 50%;
+}
+
+.gallery .row {
+  padding-bottom: 10px;
+}
+
+.gallery a p {
+  color: #5a5a5a;
+  margin-top: 5px;
+}
+
+.gallery a:hover {
+  text-decoration: none;
+}
+
+.fader {
+  position: relative;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.fader img.top {
+  position: relative;
+  z-index: 3;
+}
+
+.fader img.bottom {
+  position: absolute;
+  top: 0;
+  z-index: 1;
 }

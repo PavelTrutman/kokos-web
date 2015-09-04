@@ -3,7 +3,6 @@
   $template['page'] = 'diskuze';
 
   include_once('../app/include.php');
-  include_once('../app/carousel.php');
 
   $template['javascript'][] = array(
     'source' => './js/netteForms.js',
@@ -40,6 +39,20 @@ Díky moc
 P.S. A dělejte taky častěji soustředění, jsou totiž super!',
 );
 $viewData = $formVals;
+
+$rules = array(
+  'title' => 'Pravidla diskuze',
+  'data-content' => '<p>Chceš-li přispět do diskuze, musíš se řídit následujícími pravidly:</p>
+                     <ul>
+                       <li>Piš věcně a k tématu (matematika, seminář, soustředění, soutěže, apod.)</li>
+                       <li>Chovej se v souladu s dobrými mravy. Chceš-li nám něco vytknout, směle do toho, ale slušnou formou.</li>
+                       <li>Na fóru si pokud možno tykáme. Je hezké pozdravit (stačí ahoj).</li>
+                       <li>Zkus si přečíst i pár starších příspěvků, aby ses neptal na něco, co se již řešilo.</li>
+                       <li>Je-li to jen trochu možné, piš česky a ne cesky.</li>
+                       <li>Chceš-li reagovat na nějaký příspěvek, nepiš nové téma, ale klikni na tlačítko v pravém dolním rohu příspěvku.</li>
+                     </ul>
+                     <p>Příspěvky, které budou porušovat tato pravidla nebo budou odporovat slušným mravům, bez milosti mažeme.</p>',
+);
 
 $showForm = array();
 
@@ -83,7 +96,12 @@ $form['text']
   ->addConditionOn($form['send'], Form::SUBMITTED)
   ->setRequired('Zapomněl jsi na text.');
 
-$form->addCheckbox('agree', ' Přečetl jsem si pravidla diskuze a respektuji je.')
+$agreeLabel = Nette\Utils\Html::el();
+$agreeLabel
+  ->add(' Přečetl jsem si ')
+  ->add(Nette\Utils\Html::el('a')->setText('pravidla diskuze')->addAttributes(array('data-toggle' => 'popover', 'data-trigger' => 'focus', 'data-html' => 'true', 'data-trigger' => 'click', 'data-placement' => 'bottom'))->addAttributes($rules))
+  ->add(' a respektuji je.');
+$form->addCheckbox('agree', $agreeLabel)
   ->addConditionOn($form['send'], Form::SUBMITTED)
   ->addRule(Form::EQUAL, 'Je potřeba souhlasit s pravidly diskuze.', TRUE);
 

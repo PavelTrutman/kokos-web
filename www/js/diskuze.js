@@ -52,6 +52,7 @@ function showForm(id) {
     $('#well-' + id).removeClass('hidden');
   }
   $('#button-' + id).addClass('hidden');
+  $('[data-toggle="popover"]').popover();
   Nette.initForm(document.getElementById('form-' + id));
 }
 
