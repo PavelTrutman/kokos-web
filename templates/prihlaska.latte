@@ -1,0 +1,143 @@
+{layout "layout.latte"}
+
+{block #content}
+
+  <h1>Přihláška do semináře</h1>
+
+  <p>Než nám odešleš své první řešení, musíš se přihlásit prostřednictvím této stránky. Všechna pole jsou povinná (až na číslo orientační/popisné &ndash; stačí, když vyplníš pouze jedno z nich). <strong>Pole e-mail vyplň pravdivě, po odeslání přihlášky ti na něj přijde informační e-mail s přihlašovacími údaji a všemi podrobnostmi ohledně odesílání řešení elektronicky.</strong> Pole telefonní číslo je důležité při potřebě rychlé komunikace, např. při organizování soustředění. Vyplň jej proto tak, aby tě bylo možné rychle informovat. <strong>Přestože si necháváš řešení posílat do školy, musíš vyplnit adresu k sobě domů a naopak &ndash; když si necháváš zasílat svá řešení domů, musíš vyplnit svou školu.</strong></p>
+
+  <p><strong>Řešitelé přihlášení z minulého roku se již nemusí přihlašovat znovu!</strong></p>
+
+  <p>Je dost možné, že v seznamu škol nenajdeš tu svou. V tom případě nám napiš email na známou adresu <a href="mailto:gmkkokos@seznam.cz">gmkkokos@seznam.cz</a> a řekni nám, které školy ti chybí. Ochotně je v nejkratším možném čase doplníme. Současný seznam obsahuje všechny školy, z nichž měl KoKoS řešitele v uplynulých letech.</p>
+
+  {include form}
+{/block}
+
+{define #form}
+
+  {$form->render('begin')}
+
+  <div class="well">
+
+    <div class="form-group">
+      {$form['name']->label}
+      <div class="col-xs-10">
+        {$form['name']->control}
+      </div>
+    </div>
+    <div class="form-group">
+      {$form['surname']->label}
+      <div class="col-xs-10">
+        {$form['surname']->control}
+      </div>
+    </div>
+    <div class="form-group">
+      {$form['street']->label}
+      <div class="col-xs-10">
+        {$form['street']->control}
+      </div>
+    </div>
+    <div class="form-group">
+      {$form['numberD']->label}
+      <div class="col-xs-10">
+        {$form['numberD']->control}
+      </div>
+    </div>
+    <div class="form-group">
+      {$form['numberO']->label}
+      <div class="col-xs-10">
+        {$form['numberO']->control}
+      </div>
+    </div>
+    <div class="form-group">
+      {$form['city']->label}
+      <div class="col-xs-10">
+        {$form['city']->control}
+      </div>
+    </div>
+    <div class="form-group">
+      {$form['zip']->label}
+      <div class="col-xs-10">
+        {$form['zip']->control}
+      </div>
+    </div>
+    <div class="form-group">
+      {$form['phone']->label}
+      <div class="col-xs-10">
+        {$form['phone']->control}
+      </div>
+    </div>
+    <div class="form-group">
+      {$form['email']->label}
+      <div class="col-xs-10">
+        {$form['email']->control}
+      </div>
+    </div>
+
+  </div>
+  <div class="well">
+
+    <div class="form-group">
+      {$form['year']->label}
+      <div class="col-xs-10">
+        {$form['year']->control}
+      </div>
+    </div>
+    <div class="form-group">
+      {$form['shipping']->label}
+      <div class="col-xs-10">
+        {$form['shipping']->control}
+      </div>
+    </div>
+    <div class="form-group">
+      {$form['school']->label}
+      <div class="col-xs-10">
+        {$form['school']->control}
+      </div>
+    </div>
+
+  </div>
+  <div class="well">
+
+    <div class="form-group hidden">
+      <div class="col-xs-offset-2 col-xs-10">
+        {$form['captcha']->control}
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-xs-offset-2 col-xs-10">
+        <div id="captcha"></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-xs-offset-2 col-xs-10">
+        {$form['send']->control}
+      </div>
+    </div>
+
+  </div>
+
+  {$form->render('end')}
+
+  <script type="text/javascript">
+    function loadCaptcha() {l}
+      cId = grecaptcha.render('captcha', {l}
+        'sitekey' : '6LeGrgoTAAAAADcm2eibbollw7PzMHt14nPu6Npi',
+        'callback' : captchaCallback,
+        'expired-callback' : captchaCallbackExpired,
+      {r});
+      return cId;
+    {r};
+
+    function captchaCallback() {l}
+      $('#frm-captcha').prop("checked", true);
+    {r}
+
+    function captchaCallbackExpired() {l}
+      $('#frm-captcha').prop("checked", false);
+    {r}
+  </script>
+{/define}
+
+
+

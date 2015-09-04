@@ -1,0 +1,20 @@
+{layout "layout.latte"}
+
+{block #content}
+
+  <h1>Výsledky {$name} <small>ročník {$year['StartYear']} &ndash; {$year['FinalYear']}</small></h1>
+
+  <ul class="nav nav-tabs">
+    <li role="presentation" n:class="$grade == 0 ? active"><a href="/vysledky/{$serie}">Souhrnná</a></li>
+    {for $i = 6; $i <= 9; $i++}
+      <li role="presentation" n:class="$grade == $i ? active"><a href="/vysledky/{$serie}/{$i}">{$i}. ročník</a></li>
+    {/for}
+  </ul>
+
+  {if $table != ''}
+    {$table|noescape}
+  {else}
+    <em>Bohužel, pro tuto sérii nejsou žádné výsledky k dispozici.</em>
+  {/if}
+
+{/block}

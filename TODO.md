@@ -1,8 +1,6 @@
 ### Carousel
-  * link zaregistrovat se
 
 ### Uvod
-  * link zaregistrovat se
   * link soustredeni
 
 ### Serie
@@ -14,6 +12,13 @@
 ### KA
   * nemazat výsledky sérií z minulých let
   * result-table: 4.-5. => 4. $ndash; 5.
+  * moderování dikuze
+  * galerie - ukládat obrázky ve větším rozlišení a negenerovat náhledy přímo, v db smazat sloupce ratio a thumbnail
 
 ### Diskuze
   * pridat link na pravidla diskuze
+  * ajax na náhled
+  * předvyplnění údajů pro přihlášeného uživatele
+
+### Pro rodiče
+  * napsat sekci pro rodiče, která bude KoKoS vysvětlovat rodičům, tak aby oni sami své děti motivovali k řešení
