@@ -1,9 +1,8 @@
 ### Carousel
-  * link zaregistrovat se
   * zrušit slide s výsledky
+  * přidat slide s fotogalerií
 
 ### Uvod
-  * link zaregistrovat se
   * link soustredeni
 
 ### Serie
