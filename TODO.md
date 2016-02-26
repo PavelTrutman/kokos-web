@@ -2,8 +2,10 @@
 
 ### Uvod
   * link soustredeni
+  * fotky organizátorů
 
 ### Serie
+  * zvýšit přehlednost stránky
 
 ### Vysledky
   * ajax
@@ -17,6 +19,15 @@
 ### Diskuze
   * ajax na náhled
   * předvyplnění údajů pro přihlášeného uživatele
+  * zúžit stránku
+
+### Gallery
+  * tlačítko zpět?
+  * zkorigovat velikosti fotek
+
+### Akce
+
+### User sekce
 
 ### Pro rodiče
   * napsat sekci pro rodiče, která bude KoKoS vysvětlovat rodičům, tak aby oni sami své děti motivovali k řešení
