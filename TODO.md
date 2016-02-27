@@ -23,7 +23,6 @@
 
 ### Gallery
   * tlačítko zpět?
-  * zkorigovat velikosti fotek
 
 ### Akce
 
