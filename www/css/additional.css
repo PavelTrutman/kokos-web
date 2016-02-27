@@ -46,6 +46,10 @@
   margin-top: -5px;
 }
 
+.diskuze .popover {
+  max-width: 50%;
+}
+
 .gallery .row {
   padding-bottom: 10px;
 }

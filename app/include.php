@@ -22,25 +22,25 @@
 
     'uvod' => array(
       'name' => 'Úvod',
-      'link' => 'uvod',
+      'link' => '/uvod',
       'glyphicon' => 'home',
     ),
 
     'serie' => array(
       'name' => 'Série',
-      'link' => 'serie',
+      'link' => '/serie',
       'glyphicon' => 'puzzle-piece',
     ),
 
     'fotogalerie' => array(
       'name' => 'Fotogalerie',
-      'link' => 'fotogalerie',
+      'link' => '/fotogalerie',
       'glyphicon' => 'photo',
     ),
 
     'diskuze' => array(
       'name' => 'Diskuze',
-      'link' => 'diskuze',
+      'link' => '/diskuze',
       'glyphicon' => 'comments',
     ),
 

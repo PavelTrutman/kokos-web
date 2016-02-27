@@ -7,7 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="Koperníkův korespondenční seminář - KoKoS - je matematický seminář pro žáky 6. - 9. tříd.">
     <meta name="author" content="Pavel Trutman">
-    <link rel="icon" href="./images/favicon.ico">
+    <link rel="icon" href="/images/favicon.ico">
     <meta name="keywords" content="KoKoS, Koperníkův Korespondenčí Seminář, Matematika, Matematický seminář"/>
 
     <title>Koperníkův Korespondenční seminář</title>
@@ -47,7 +47,7 @@
               <ul class="nav navbar-nav">
 
                 {foreach $menu as $itemKey => $item}
-                  <li n:class="$itemKey === $page ? active"><a href={$item['link']}><span class="fa fa-lg fa-{$item['glyphicon']}"></span>&nbsp;{$item['name']}</a></li>
+                  <li n:class="$itemKey === $page ? active"><a href="{$item['link']}"><span class="fa fa-lg fa-{$item['glyphicon']}"></span>&nbsp;{$item['name']}</a></li>
                 {/foreach}
 
               </ul>

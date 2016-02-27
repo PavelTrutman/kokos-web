@@ -1,13 +1,11 @@
 ### Carousel
-  * link zaregistrovat se
-  * zrušit slide s výsledky
 
 ### Uvod
-  * link zaregistrovat se
   * link soustredeni
+  * fotky organizátorů
 
 ### Serie
-  * archiv
+  * zvýšit přehlednost stránky
 
 ### Vysledky
   * ajax
@@ -19,9 +17,17 @@
   * galerie - ukládat obrázky ve větším rozlišení a negenerovat náhledy přímo, v db smazat sloupce ratio a thumbnail
 
 ### Diskuze
-  * pridat link na pravidla diskuze
   * ajax na náhled
   * předvyplnění údajů pro přihlášeného uživatele
+  * zúžit stránku
+
+### Gallery
+  * tlačítko zpět?
+  * zkorigovat velikosti fotek
+
+### Akce
+
+### User sekce
 
 ### Pro rodiče
   * napsat sekci pro rodiče, která bude KoKoS vysvětlovat rodičům, tak aby oni sami své děti motivovali k řešení
