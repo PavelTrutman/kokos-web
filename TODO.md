@@ -21,9 +21,6 @@
   * předvyplnění údajů pro přihlášeného uživatele
   * zúžit stránku
 
-### Gallery
-  * tlačítko zpět?
-
 ### Akce
 
 ### User sekce
