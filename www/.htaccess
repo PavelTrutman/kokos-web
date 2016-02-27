@@ -15,6 +15,7 @@ RewriteRule ^fotogalerie$ /fotogalerie.php [R]
 RewriteRule ^fotogalerie/(.*)$ /fotogalerie.php?name=$1 [R]
 RewriteRule ^diskuze$ /diskuze.php [R]
 RewriteRule ^diskuze/([0-9]*)$ /diskuze.php?page=$1 [R]
+RewriteRule ^prihlasit-se$ /login.php [R]
 
 <filesMatch "\.(php|html|htm|js|css)$">
   FileETag None

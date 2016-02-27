@@ -12,6 +12,10 @@
   margin-top: 50px;
 }
 
+.navbar-fixed-top .navbar-collapse {
+  padding-right: 15px;
+}
+
 .result-table th:first-letter {
   text-transform: uppercase;
 }
