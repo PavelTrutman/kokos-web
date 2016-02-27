@@ -21,10 +21,6 @@
   * předvyplnění údajů pro přihlášeného uživatele
   * zúžit stránku
 
-### Gallery
-  * tlačítko zpět?
-  * zkorigovat velikosti fotek
-
 ### Akce
 
 ### User sekce

@@ -11,7 +11,7 @@
       <div class="row">
         {for $j = 4*$i; $j < sizeof($photos) && $j < 4*($i + 1); $j++}
           <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 text-center">
-            <a href="#" class="thumbnail">
+            <a href="#" class="thumbnail" onClick="return false;">
               <img height="100%" class="img-responsive img-rounded center-block" id="photo-{$j}" src="/photo.php?galleryId={$data['Id']}&photoId={$photos[$j]['PhotoId']}&thumb=2"/>
               <p>{$photos[$j]['Description']}</p>
             </a>
@@ -30,13 +30,13 @@
           <h4 class="modal-title"></h4>
         </div>
         <div class="modal-body">
-          <img class="img-responsive">
+          <img class="img-responsive modal-img">
         </div>
         <div class="modal-footer">
           <nav>
             <ul class="pager">
-              <li class="previous"><a href="#"><span class="fa fa-arrow-left" aria-hidden="true"></span>&nbsp;Předchozí</a></li>
-              <li class="next"><a href="#">Následující&nbsp;<span aria-hidden="true" class="fa fa-arrow-right"></span></a></li>
+              <li class="previous"><a href="#" onClick="return false;"><span class="fa fa-arrow-left" aria-hidden="true"></span>&nbsp;Předchozí</a></li>
+              <li class="next"><a href="#" onClick="return false;">Následující&nbsp;<span aria-hidden="true" class="fa fa-arrow-right"></span></a></li>
             </ul>
           </nav>
         </div>
