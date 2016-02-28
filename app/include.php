@@ -18,6 +18,7 @@
       session_destroy();
     }
   }
+  $template['session'] = $_SESSION;
 
   // errors and successes to the template
   $template['errors'] = array();

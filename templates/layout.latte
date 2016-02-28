@@ -53,7 +53,15 @@
               </ul>
 
               <ul class="nav navbar-nav navbar-right">
-                <li n:class="prihlasit-se === $page ? active"><a href="prihlasit-se"><span class="fa fa-lg fa-user"></span>&nbsp;Přihlásit se</a></li>
+                {ifset $session['id']}
+                  <li n:class="prihlasit-se === $page ? active, dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" onclick="return false;"><span class="fa fa-lg fa-bars"></span>&nbsp;{$session['name']} {$session['surname']}<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li n:class="ucet === $page ? active"><a href="/ucet"><span class="fa fa-user">&nbsp;Účet</span></a></li>
+                    </ul>
+                  </li>
+                {else}
+                  <li n:class="prihlasit-se === $page ? active"><a href="prihlasit-se"><span class="fa fa-lg fa-user"></span>&nbsp;Přihlásit se</a></li>
+                {/ifset}
               </ul>
             </div>
           </div>
