@@ -18,6 +18,7 @@ RewriteRule ^diskuze/([0-9]*)$ /diskuze.php?page=$1 [R]
 RewriteRule ^prihlasit-se$ /login.php [R]
 RewriteRule ^odhlasit-se$ /logout.php [R]
 RewriteRule ^ucet$ /ucet.php [R]
+RewriteRule ^nastaveni$ /nastaveni.php [R]
 
 <filesMatch "\.(php|html|htm|js|css)$">
   FileETag None

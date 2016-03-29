@@ -40,7 +40,7 @@ $form->getElementPrototype()->role('form');
 
 foreach ($form->getControls() as $control) {
   if (!$control instanceof Nette\Forms\Controls\Checkbox) {
-    $control->getLabelPrototype()->class("col-xs-2 control-label", TRUE);
+    $control->getLabelPrototype()->class("col-xs-3 control-label", TRUE);
   }
   if ($control instanceof Nette\Forms\Controls\TextInput || $control instanceof Nette\Forms\Controls\TextArea) {
     $control->getControlPrototype()->addClass('form-control');
