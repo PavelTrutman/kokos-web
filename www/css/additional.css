@@ -35,6 +35,7 @@ form.upload .row div {
 
 form.upload .btn {
   margin-left: 15px;
+  margin-bottom: 15px;
 }
 
 .result-table th:first-letter {
