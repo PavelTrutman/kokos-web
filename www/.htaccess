@@ -3,6 +3,9 @@ php_flag display_errors on
 php_flag html_errors on
 php_flag  log_errors on
 
+php_value post_max_size 30M
+php_value upload_max_filesize 30M
+
 RewriteEngine on
 RewriteRule ^uvod$ /index.php [R]
 RewriteRule ^$ /uvod [R]
@@ -19,6 +22,7 @@ RewriteRule ^prihlasit-se$ /login.php [R]
 RewriteRule ^odhlasit-se$ /logout.php [R]
 RewriteRule ^ucet$ /ucet.php [R]
 RewriteRule ^nastaveni$ /nastaveni.php [R]
+RewriteRule ^nahrat-reseni$ /upload.php [R]
 
 <filesMatch "\.(php|html|htm|js|css)$">
   FileETag None
