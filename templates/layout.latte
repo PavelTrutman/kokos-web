@@ -51,6 +51,21 @@
                 {/foreach}
 
               </ul>
+
+              <ul class="nav navbar-nav navbar-right">
+                {ifset $session['id']}
+                  <li n:class="prihlasit-se === $page ? active, dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" onclick="return false;"><span class="fa fa-lg fa-bars"></span>&nbsp;{$session['name']} {$session['surname']}<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li n:class="ucet === $page ? active"><a href="/ucet"><span class="fa fa-user">&nbsp;Účet</span></a></li>
+                      <li n:class="nahrat-reseni === $page ? active"><a href="/nahrat-reseni"><span class="fa fa-cloud-upload">&nbsp;Nahrát řešení</span></a></li>
+                      <li n:class="nastaveni === $page ? active"><a href="/nastaveni"><span class="fa fa-cogs">&nbsp;Nastavení</span></a></li>
+                      <li n:class="odhlasit-se === $page ? active"><a href="/odhlasit-se"><span class="fa fa-lock">&nbsp;Odhlásit se</span></a></li>
+                    </ul>
+                  </li>
+                {else}
+                  <li n:class="prihlasit-se === $page ? active"><a href="prihlasit-se"><span class="fa fa-lg fa-user"></span>&nbsp;Přihlásit se</a></li>
+                {/ifset}
+              </ul>
             </div>
           </div>
         </nav>

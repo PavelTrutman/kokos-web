@@ -12,6 +12,32 @@
   margin-top: 50px;
 }
 
+.navbar-fixed-top .navbar-collapse {
+  padding-right: 15px;
+}
+
+form.upload .well h4 {
+  margin: 0;
+}
+
+form.upload .form-group {
+  padding-left: 15px;
+  margin: 0;
+}
+
+form.upload .row {
+  margin: 5px 0 5px 0;
+}
+
+form.upload .row div {
+  padding: 0;
+}
+
+form.upload .btn {
+  margin-left: 15px;
+  margin-bottom: 15px;
+}
+
 .result-table th:first-letter {
   text-transform: uppercase;
 }

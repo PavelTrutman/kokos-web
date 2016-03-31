@@ -10,6 +10,16 @@
   $latte = new Latte\Engine;
   $latte->setTempDirectory('../tmp');
 
+  //session
+  session_start();
+  if(isset($_SESSION['id']) && ($_SESSION['id'] !== NULL)) {
+    if(!isset($_SESSION['ip']) || ($_SESSION['ip'] != $_SERVER['REMOTE_ADDR'])) {
+      session_unset();
+      session_destroy();
+    }
+  }
+  $template['session'] = $_SESSION;
+
   // errors and successes to the template
   $template['errors'] = array();
   $template['successes'] = array();

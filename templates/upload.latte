@@ -1,0 +1,53 @@
+{layout "layout.latte"}
+
+{block #content}
+
+  <h1>Nahrát řešení</h1>
+  <p>V této sekci můžeš nahrávat své vyřešené příklady. Jako tvoje řešení se bude počítat poslední nahraný soubor pro danou úlohu. Maximální velikost jednoho souboru je 3 MB, povolený typ souborů je PDF nebo obrázek (JPG, BMP, PNG). Ohodnoceno ti bude tvoje poslední nahrané řešení.</p>
+
+  {include #form}
+
+{/block}
+
+{define #form}
+
+  {$form->render('begin')}
+
+  {for $i = 1; $i <= 6; $i++}
+    <div class="well">
+      <div class="form-group">
+        <h4>{$form['file'.$i]->label}</h4>
+        <p>Za tento příklad můžeš dostat <b>{$serie["MaxScore" . $i]}</b> bodů.</p>
+        <div class="row">
+          <div class="col-xs-2">
+            <p><b>Nahraná řešení:</b></p>
+          </div>
+          <div class="col-xs-10">
+            {ifset $files[$i]}
+              {foreach $files[$i] as $f}
+                <div class="col-xs-3"><a href="/reseni/{$f['Id']}"><span class="fa fa-lg {$f['Icon']}"></span>&nbsp;{$f['Created']->format('j. n. Y H:i')} ({$f['Size']|bytes})</a></div>
+              {/foreach}
+            {else}
+              <span>K tomuto příkladu jsi ještě nenahrál žádná řešení.</span>
+            {/ifset}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-2">
+            <p><b>Nahrát řešení:</b></p>
+          </div>
+          <div class="col-xs-9">
+            {$form['file'.$i]->control}
+          </div>
+        </div>
+      </div>
+    </div>
+  {/for}
+
+  <div class="form-group">
+    {$form['send']->control}
+  </div>
+
+  {$form->render('end')}
+
+{/define}
