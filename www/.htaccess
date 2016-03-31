@@ -23,6 +23,7 @@ RewriteRule ^odhlasit-se$ /logout.php [R]
 RewriteRule ^ucet$ /ucet.php [R]
 RewriteRule ^nastaveni$ /nastaveni.php [R]
 RewriteRule ^nahrat-reseni$ /upload.php [R]
+RewriteRule ^reseni/([0-9]*)$ /reseni.php?id=$1 [R]
 
 <filesMatch "\.(php|html|htm|js|css)$">
   FileETag None
