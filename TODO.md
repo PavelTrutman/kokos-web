@@ -1,4 +1,5 @@
 ### Carousel
+  * snížit rozlišení obrázků (pomalé načítání)
 
 ### Uvod
   * link soustredeni
@@ -24,6 +25,7 @@
 ### Akce
 
 ### User sekce
+  * fix upload sekce
 
 ### Pro rodiče
   * napsat sekci pro rodiče, která bude KoKoS vysvětlovat rodičům, tak aby oni sami své děti motivovali k řešení
