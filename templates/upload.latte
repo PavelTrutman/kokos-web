@@ -5,7 +5,13 @@
   <h1>Nahrát řešení</h1>
   <p>V této sekci můžeš nahrávat své vyřešené příklady. Jako tvoje řešení se bude počítat poslední nahraný soubor pro danou úlohu. Maximální velikost jednoho souboru je 3 MB, povolený typ souborů je PDF nebo obrázek (JPG, BMP, PNG). Ohodnoceno ti bude tvoje poslední nahrané řešení.</p>
 
-  {include #form}
+  {if $serie}
+    <h3>{$serie['Name']}</h3>
+    <p><b>Své řešení můžeš odevzdávat až do {date('j. n. Y', strtotime($serie['ClosureDateTime']))}.</b></p>
+    {include #form}
+  {else}
+    <h3>V tuto chvíli není otevřená žádná série k nahrávání řešení.</h3>
+  {/if}
 
 {/block}
 
