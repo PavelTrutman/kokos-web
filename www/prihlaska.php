@@ -212,11 +212,11 @@ if ($form->isSuccess()) {
           $additional_headers = "MIME-Version: 1.0" . "\r\n";
           $additional_headers .= "Content-type: text/html; charset=UTF-8" . "\r\n";
           $additional_headers .= "From: KoKoS <no-reply@kokos.gmk.cz>" . "\r\n";
-          $additional_headers .= "X-Sender: <no-reply@kokos.gmk.cz>\r\n";
-          $additional_headers .= "Reply-To: KoKoS <gmkkokos@seznam.cz>\r\n";
+          $additional_headers .= "X-Sender: <no-reply@kokos.gmk.cz>" . "\r\n";
+          $additional_headers .= "Reply-To: KoKoS <gmkkokos@seznam.cz>" . "\r\n";
           $additional_headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
-          $additional_headers .= "X-Priority: 2 (Normal)\r\n";
-          $additional_headers .= "Return-Path: <gmkkokos@seznam.cz>\r\n";
+          $additional_headers .= "X-Priority: 2 (Normal)" . "\r\n";
+          $additional_headers .= "Return-Path: gmkkokos@seznam.cz" . "\r\n";
 
           mail($to, '=?UTF-8?B?'.base64_encode($subject).'?=', $message, $additional_headers);
 
