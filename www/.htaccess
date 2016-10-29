@@ -1,29 +1,30 @@
-php_flag display_startup_errors on
-php_flag display_errors on
+#php_flag display_startup_errors on
+#php_flag display_errors on
 php_flag html_errors on
-php_flag  log_errors on
+php_flag log_errors on
 
 php_value post_max_size 30M
 php_value upload_max_filesize 30M
 
 RewriteEngine on
-RewriteRule ^uvod$ /index.php [R]
-RewriteRule ^$ /uvod [R]
-RewriteRule ^prihlaska$ /prihlaska.php [R]
-RewriteRule ^serie$ /serie.php [R]
-RewriteRule ^serie/([0-9]*)$ /serie-download.php?id=$1 [R]
-RewriteRule ^vysledky/([0-9]*)$ /vysledky.php?id=$1 [R]
-RewriteRule ^vysledky/([0-9]*)/([0-9]*)$ /vysledky.php?id=$1&grade=$2 [R]
-RewriteRule ^fotogalerie$ /fotogalerie.php [R]
-RewriteRule ^fotogalerie/(.*)$ /fotogalerie.php?name=$1 [R]
-RewriteRule ^diskuze$ /diskuze.php [R]
-RewriteRule ^diskuze/([0-9]*)$ /diskuze.php?page=$1 [R]
-RewriteRule ^prihlasit-se$ /login.php [R]
-RewriteRule ^odhlasit-se$ /logout.php [R]
-RewriteRule ^ucet$ /ucet.php [R]
-RewriteRule ^nastaveni$ /nastaveni.php [R]
-RewriteRule ^nahrat-reseni$ /upload.php [R]
-RewriteRule ^reseni/([0-9]*)$ /reseni.php?id=$1 [R]
+RewriteRule ^uvod$ /index.php
+RewriteRule ^$ /uvod
+RewriteRule ^prihlaska$ /prihlaska.php
+RewriteRule ^soustredeni$ /soustredeni.php
+RewriteRule ^serie$ /serie.php
+RewriteRule ^serie/([0-9]*)$ /serie-download.php?id=$1
+RewriteRule ^vysledky/([0-9]*)$ /vysledky.php?id=$1
+RewriteRule ^vysledky/([0-9]*)/([0-9]*)$ /vysledky.php?id=$1&grade=$2
+RewriteRule ^fotogalerie$ /fotogalerie.php
+RewriteRule ^fotogalerie/(.*)$ /fotogalerie.php?name=$1
+RewriteRule ^diskuze$ /diskuze.php
+RewriteRule ^diskuze/([0-9]*)$ /diskuze.php?page=$1
+RewriteRule ^prihlasit-se$ /login.php
+RewriteRule ^odhlasit-se$ /logout.php
+RewriteRule ^ucet$ /ucet.php
+RewriteRule ^nastaveni$ /nastaveni.php
+RewriteRule ^nahrat-reseni$ /upload.php
+RewriteRule ^reseni/([0-9]*)$ /reseni.php?id=$1
 
 <filesMatch "\.(php|html|htm|js|css)$">
   FileETag None
