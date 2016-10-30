@@ -30,7 +30,7 @@ else {
   $template['page'] = 'fotogalerie';
 
   $template['javascript'][] = array(
-    'source' => './js/fotogalerie-list.js',
+    'source' => '/js/fotogalerie-list.js',
   );
 
   // gallery list
