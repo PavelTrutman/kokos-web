@@ -149,6 +149,10 @@
   {/capture}
   <script type="text/javascript">
     var formHtml = {$formHtml};
+    
+    window.onload = function() {
+      $('[data-toggle="popover"]').popover();
+    };
   </script>
 
   </div>
