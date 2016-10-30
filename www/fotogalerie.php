@@ -16,7 +16,7 @@ if(isset($_GET['name'])) {
     $template['data'] = $data;
     $template['photos'] = $photos;
     $template['javascript'][] = array(
-      'source' => './js/fotogalerie.js',
+      'source' => '/js/fotogalerie.js',
     );
     $latte->render('../templates/fotogalerie.latte', $template);
 

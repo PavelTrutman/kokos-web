@@ -5,7 +5,7 @@
   include_once('../app/include.php');
 
   $template['javascript'][] = array(
-    'source' => './js/netteForms.js',
+    'source' => '/js/netteForms.js',
   );
   $template['javascript'][] = array(
     'source' => 'https://www.google.com/recaptcha/api.js?onload=loadCaptcha&render=explicit',
