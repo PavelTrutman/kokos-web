@@ -186,7 +186,7 @@ if ($form->isSuccess()) {
           $to = $toDB['Email'];
           $subject = "KoKoS: Registrace do semináře";
                      
-          $message = '<img style="float: right; margin-left: 20px" src="http://kokos.gmk.cz/images/logo.png">
+          $message = '<img style="float: right; margin-left: 20px; height: 100px;" src="http://kokos.gmk.cz/images/logo.png">
                       <p>Milý řešiteli, </p>
                       <p style="text-align: justify;">vítej v KoKoSu! Právě jsi se přihlásil do <b>Koperníkova Korespondenčního Semináře</b>. Po přihlášení ke svému účtu na adrese <a href="http://kokos.gmk.cz/login">kokos.gmk.cz/login</a> můžeš jednoduše sledovat, jak si v semináři vedeš, kolik bodů jsi dostal a novinkou tohoto roku je: <b>odesílání řešení elektronicky</b>, tedy již žádné cesty na poštu!</p>
                       <p>Tvé přihlašovací údaje jsou:</p>
