@@ -26,17 +26,17 @@ use Nette\Forms\Form;
 // form for adding posts
 
 $formVals = array(
-  'name' => 'Zatvrzelý KoKoSák',
-  'email' => 'zatvrdl@do.kokosu.cz',
+  'name' => 'Jan z KoKoSu',
+  'email' => 'jan@kokos.cz',
   'headline' => 'Víc příkladů, víc sérií!',
   'text' => 
 '//Milí KoKoSáci//,
 
-řešení **KoKoSu** mě strašně baví a nemohli by jste posílat série častěji s více příklady uvnitř? Já je totiž vyřeším všechny strašně rychle a pak nemám co dělat.
+řešení **KoKoSu** mě strašně baví! Nemohli by jste proto posílat série častěji s více příklady uvnitř?
 
 Díky moc
 
-P.S. A dělejte taky častěji soustředění, jsou totiž super!',
+P.S. Soustředění jsou taky strašně fajn. Mohla by být častěji.',
 );
 $viewData = $formVals;
 
