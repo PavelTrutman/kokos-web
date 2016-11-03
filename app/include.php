@@ -10,6 +10,9 @@
   $latte = new Latte\Engine;
   $latte->setTempDirectory('../tmp');
 
+  // add latte filters
+  addFilters($latte);
+
   //session
   session_start();
   if(isset($_SESSION['id']) && ($_SESSION['id'] !== NULL)) {
@@ -26,6 +29,9 @@
 
   // javascripts
   $template['javascript'] = array();
+  $template['javascript'][] = array(
+    'source' => '/js/utils.js',
+  );
 
   // menu
   $template['menu'] = array(
@@ -61,5 +67,24 @@
     ),
 
   );
+
+
+  function addFilters(&$latte) {
+    /*
+     *  Loads latte filters.
+     *
+     *  Args:
+     *    $latte: latte object
+     *
+     *  Returns:
+     *
+     */
+    
+    // load filters
+    require_once('latteFilters.php');
+
+    // register filters
+    $latte->addFilter('hideMail', 'hideMail');
+  }
 
 ?>

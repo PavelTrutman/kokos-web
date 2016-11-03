@@ -47,6 +47,10 @@ function showForm(id) {
     }
     cId = loadCaptcha('captcha-' + id);
     captchaId[cId] = id;
+
+    // decode mail
+    decodeMailElement($('#well-' + id).find('.hiddenMail'));
+
   }
   else {
     $('#well-' + id).removeClass('hidden');
@@ -54,6 +58,7 @@ function showForm(id) {
   $('#button-' + id).addClass('hidden');
   $('[data-toggle="popover"]').popover();
   Nette.initForm(document.getElementById('form-' + id));
+  
 }
 
 function hideForm(id) {
