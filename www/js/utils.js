@@ -5,7 +5,6 @@ function decodeMail(s) {
 }
 
 function decodeMailElement(element) {
-  console.log(element);
   element.text(decodeMail(element.text()));
 
   if(element.prop('tagName') == 'A') {
