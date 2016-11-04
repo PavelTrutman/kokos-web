@@ -14,7 +14,7 @@
 
       <div class="carousel-inner" role="listbox">
         {foreach $carousel as $key => $item}
-          <div n:class="$carouselActive == $key ? active, item" style="background-image: url('../images/carousel/0{$iterator->counter - 1}.jpg')">
+          <div n:class="$carouselActive == $key ? active, item" style="background-image: url('/images/carousel/0{$iterator->counter - 1}.jpg')">
             <div class="container">
               <div class="carousel-caption">
                 {$item|noescape}

@@ -1,5 +1,4 @@
 ### Carousel
-  * snížit rozlišení obrázků (pomalé načítání)
 
 ### Uvod
   * link soustredeni
