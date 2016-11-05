@@ -1,7 +1,8 @@
 function loadImage(galleryId) {
   //pick random new image
-  var photoId = Math.floor(Math.random() * photos[galleryId].length);
-  $('#'+ galleryId + ' img.bottom').attr('src', '/photo.php?galleryId=' + galleryId + '&photoId=' + photoId + '&thumb=2');
+  var idxs = Object.keys(photos[galleryId]);
+  var key = Math.floor(Math.random() * idxs.length);
+  $('#'+ galleryId + ' img.bottom').attr('src', '/photo.php?galleryId=' + galleryId + '&photoId=' + idxs[key] + '&thumb=2');
   setTimeout(function() {crossfade(galleryId)}, 2000);
 }
 
