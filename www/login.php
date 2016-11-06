@@ -9,7 +9,7 @@
   }
 
   $template['javascript'][] = array(
-    'source' => './js/netteForms.js',
+    'source' => '/js/netteForms.js',
   );
 
 use Nette\Forms\Form;
