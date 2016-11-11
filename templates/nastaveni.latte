@@ -3,42 +3,44 @@
 {block #content}
   <div class="col-xs-12 col-md-6">
     <h1>Tvé údaje</h1>
-    <table class="table table-stripped table-hover">
-      <tbody>
-        <tr>
-          <th>Jméno:</th>
-          <td>{$data['Name']}</td>
-        </tr>
-        <tr>
-          <th>Přijmení:</th>
-          <td>{$data['Surname']}</td>
-        </tr>
-        <tr>
-          <th>Adresa:</th>
-          <td>{$data['Street']} {$data['Number']}<br>{$data['Zipcode']} {$data['City']}</td>
-        </tr>
-        <tr>
-          <th>Telefon:</th>
-          <td>{$data['Phone']}</td>
-        </tr>
-        <tr>
-          <th>E-mail:</th>
-          <td>{$data['Email']}</td>
-        </tr>
-        <tr>
-          <th>Škola:</th>
-          <td>{$data['School']}, {$data['SchoolCity']}</td>
-        </tr>
-        <tr>
-          <th>Ročník:</th>
-          <td>{$data['Grade']}</td>
-        </tr>
-        <tr>
-          <th>Zasílat:</th>
-          <td>{$data['Shipping']}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-responsive">
+      <table class="table table-stripped table-hover">
+        <tbody>
+          <tr>
+            <th>Jméno:</th>
+            <td>{$data['Name']}</td>
+          </tr>
+          <tr>
+            <th>Přijmení:</th>
+            <td>{$data['Surname']}</td>
+          </tr>
+          <tr>
+            <th>Adresa:</th>
+            <td>{$data['Street']} {$data['Number']}<br>{$data['Zipcode']} {$data['City']}</td>
+          </tr>
+          <tr>
+            <th>Telefon:</th>
+            <td>{$data['Phone']}</td>
+          </tr>
+          <tr>
+            <th>E-mail:</th>
+            <td>{$data['Email']}</td>
+          </tr>
+          <tr>
+            <th>Škola:</th>
+            <td>{$data['School']}, {$data['SchoolCity']}</td>
+          </tr>
+          <tr>
+            <th>Ročník:</th>
+            <td>{$data['Grade']}</td>
+          </tr>
+          <tr>
+            <th>Zasílat:</th>
+            <td>{$data['Shipping']}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <p>Neodpovídají tvoje údaje? Napiš nám e-mail na <a href="mailto:{$s = 'gmkkokos@seznam.cz'|hideMail}" class="hiddenMail">{$s = 'gmkkokos@seznam.cz'|hideMail}</a>.</p>
   </div>

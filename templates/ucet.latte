@@ -7,38 +7,42 @@
   <p>To znamená, že jsi <b>{$rankTotal}.<span n:if="$rankTotalTies != 0">&ndash;{$rankTotal + $rankTotalTies}.</span></b>, ve své kategorii <b>{$rankGrade}.<span n:if="$rankGradeTies != 0">&ndash;{$rankGrade + $rankGradeTies}.</span></b></p>
 
   <h2>Obodování příkladů</h2>
-  <table class="table table-striped table-hover">
-    <tbody>
-     <tr>
-       <th></th>
-       <th class="text-center">1. příklad</th>
-       <th class="text-center">2. příklad</th>
-       <th class="text-center">3. příklad</th>
-       <th class="text-center">4. příklad</th>
-       <th class="text-center">5. příklad</th>
-       <th class="text-center">6. příklad</th>
-       <th class="text-center">Celkem</th>
-     </tr>
-
-     {foreach $serie as $n => $row}
+  <div class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead>
        <tr>
-         <td><b><a href="/serie/{$row['Id']}">{$row['Name']}</a></b></td>
-         {for $i = 1; $i <= 6; $i++}
-           <td class="text-center">
-             {if $row['solution'] !== FALSE}
-               <a href="/reseni/{$row['solution']}">
-                 {if ($row['score' . $i] === FALSE)}&ndash;{else}{$row['score' . $i]}{/if}
-              </a>
-              {else}
-                 {if ($row['score' . $i] === FALSE)}&ndash;{else}{$row['score' . $i]}{/if}
-              {/if}
-               / {$row['MaxScore' . $i]}</td>
-         {/for}
-         <td class="text-center">{$row['score']} / {$row['maxScore']}</td>
+         <th></th>
+         <th class="text-center">1. příklad</th>
+         <th class="text-center">2. příklad</th>
+         <th class="text-center">3. příklad</th>
+         <th class="text-center">4. příklad</th>
+         <th class="text-center">5. příklad</th>
+         <th class="text-center">6. příklad</th>
+         <th class="text-center">Celkem</th>
        </tr>
-     {/foreach}
-
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+  
+       {foreach $serie as $n => $row}
+         <tr>
+           <td><b><a href="/serie/{$row['Id']}">{$row['Name']}</a></b></td>
+           {for $i = 1; $i <= 6; $i++}
+             <td class="text-center">
+               {if $row['solution'] !== FALSE}
+                 <a href="/reseni/{$row['solution']}">
+                   {if ($row['score' . $i] === FALSE)}&ndash;{else}{$row['score' . $i]}{/if}
+                </a>
+                {else}
+                   {if ($row['score' . $i] === FALSE)}&ndash;{else}{$row['score' . $i]}{/if}
+                {/if}
+                 / {$row['MaxScore' . $i]}</td>
+           {/for}
+           <td class="text-center">{$row['score']} / {$row['maxScore']}</td>
+         </tr>
+       {/foreach}
+  
+      </tbody>
+    </table>
+  </div>
 
 {/block}

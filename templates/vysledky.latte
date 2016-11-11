@@ -12,7 +12,9 @@
   </ul>
 
   {if $table != ''}
-    {$table|noescape}
+    <div class="table-responsive">
+      {$table|noescape}
+    </div>
   {else}
     <em>Bohužel, pro tuto sérii nejsou žádné výsledky k dispozici.</em>
   {/if}
