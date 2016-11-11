@@ -52,6 +52,10 @@ form.upload .btn {
   margin-bottom: 15px;
 }
 
+form .radio-inline {
+  margin-right: 10px;
+}
+
 .result-table th:first-letter {
   text-transform: uppercase;
 }
