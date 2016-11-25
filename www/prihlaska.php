@@ -188,7 +188,7 @@ if ($form->isSuccess()) {
                      
           $message = '<img style="float: right; margin-left: 20px; height: 100px;" src="http://kokos.gmk.cz/images/logo.png">
                       <p>Milý řešiteli, </p>
-                      <p style="text-align: justify;">vítej v KoKoSu! Právě jsi se přihlásil do <b>Koperníkova Korespondenčního Semináře</b>. Po přihlášení ke svému účtu na adrese <a href="http://kokos.gmk.cz/prihlasit-se">kokos.gmk.cz/prihlasit-se</a> můžeš jednoduše nahrávat svá řešení příkladů, sledovat, jak si v semináři vedešnebo třeba kolik bodů jsi dostal za svůj odeslaný příklad.</p>
+                      <p style="text-align: justify;">vítej v KoKoSu! Právě jsi se přihlásil do <b>Koperníkova Korespondenčního Semináře</b>. Po přihlášení ke svému účtu na adrese <a href="http://kokos.gmk.cz/prihlasit-se">kokos.gmk.cz/prihlasit-se</a> můžeš jednoduše nahrávat svá řešení příkladů, sledovat, jak si v semináři vedeš nebo třeba kolik bodů jsi dostal za svůj odeslaný příklad.</p>
                       <p>Tvé přihlašovací údaje jsou:</p>
                       <table style="margin-left: 20px;">
                         <tr>
