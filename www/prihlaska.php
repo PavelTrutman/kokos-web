@@ -188,7 +188,7 @@ if ($form->isSuccess()) {
                      
           $message = '<img style="float: right; margin-left: 20px; height: 100px;" src="http://kokos.gmk.cz/images/logo.png">
                       <p>Milý řešiteli, </p>
-                      <p style="text-align: justify;">vítej v KoKoSu! Právě jsi se přihlásil do <b>Koperníkova Korespondenčního Semináře</b>. Po přihlášení ke svému účtu na adrese <a href="http://kokos.gmk.cz/login">kokos.gmk.cz/login</a> můžeš jednoduše sledovat, jak si v semináři vedeš, kolik bodů jsi dostal a novinkou tohoto roku je: <b>odesílání řešení elektronicky</b>, tedy již žádné cesty na poštu!</p>
+                      <p style="text-align: justify;">vítej v KoKoSu! Právě jsi se přihlásil do <b>Koperníkova Korespondenčního Semináře</b>. Po přihlášení ke svému účtu na adrese <a href="http://kokos.gmk.cz/prihlasit-se">kokos.gmk.cz/prihlasit-se</a> můžeš jednoduše nahrávat svá řešení příkladů, sledovat, jak si v semináři vedešnebo třeba kolik bodů jsi dostal za svůj odeslaný příklad.</p>
                       <p>Tvé přihlašovací údaje jsou:</p>
                       <table style="margin-left: 20px;">
                         <tr>
@@ -216,9 +216,9 @@ if ($form->isSuccess()) {
           $additional_headers .= "Reply-To: KoKoS <gmkkokos@seznam.cz>" . "\r\n";
           $additional_headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
           $additional_headers .= "X-Priority: 2 (Normal)" . "\r\n";
-          $additional_headers .= "Return-Path: gmkkokos@seznam.cz" . "\r\n";
+          $additional_headers .= "Return-Path: no-reply@kokos.gmk.cz" . "\r\n";
 
-          mail($to, '=?UTF-8?B?'.base64_encode($subject).'?=', $message, $additional_headers);
+          mail($to, '=?UTF-8?B?'.base64_encode($subject).'?=', $message, $additional_headers, '-fno-reply@kokos.gmk.cz');
 
           $template['data'] = $toDB;
           $template['successes'][] = 'Byl jsi úspěšně zaregistrován do semináře!';
