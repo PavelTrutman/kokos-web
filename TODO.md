@@ -1,7 +1,6 @@
 ### Carousel
 
 ### Uvod
-  * link soustredeni
   * fotky organizátorů
 
 ### Serie
@@ -22,6 +21,7 @@
   * zúžit stránku
 
 ### Akce
+  * předvyplnění údajů pro přihlášeného uživatele
 
 ### User sekce
 

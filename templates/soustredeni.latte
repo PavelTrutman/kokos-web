@@ -1,0 +1,165 @@
+{layout "layout.latte"}
+
+{block #content}
+
+  {if $camp}
+
+    <div class="col-xs-12 col-md-6">
+      <h1>{$camp['Name']}</h1>
+      <p>{$camp['Description']|noescape}</p>
+    </div>
+  
+    <div class="col-xs-12 col-md-6">
+      <h2>Přihláška na soustředění</h2>
+      {if ($openDate < $nowDate) && ($closureDate > $nowDate)}
+        <p>Přihlášky se uzavírají <strong>{$camp['ClosureDate']|date:'j. n. Y'}</strong>.</p>
+        {include #form}
+      {elseif $closureDate < $nowDate}
+        <p>Přihlašování skončilo <strong>{$camp['ClosureDate']|date:'j. n. Y'}</strong>.</p>
+      {elseif $openDate > $nowDate}
+        <p>Přihlašování začíná <strong>{$camp['OpenDate']|date:'j. n. Y'}</strong>.</p>
+      {/if}
+
+      {if $openDate < $nowDate}
+        <h2>Přihlášení účastníci</h2>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Jméno a Příjmení</th>
+                <th>Ročník ZŠ</th>
+              </tr>
+            </thead>
+            <tbody>
+              {if count($people) > 0}
+                {foreach $people as $user}
+                <tr>
+                  <td class="text-right">{$iterator->counter}.</td>
+                  <td>{$user['Name']} {$user['Surname']}</td>
+                  <td>{$user['Year']}.</td>
+                </tr>
+                {/foreach}
+              {else}
+                <tr>
+                  <td colspan="3"><em>Prozatím se nikdo nepřihlásil.</em></td>
+                </tr>
+              {/if}
+            </tbody>
+          </table>
+        </div>
+      {/if}
+      
+    </div>
+
+  {else}
+    <h1>Žádné soustředění se zatím nekoná.</h1>
+  {/if}
+
+{/block}
+
+
+{define #form}
+  <div class="well">
+
+    {$form->render('begin')}
+
+    <div class="form-group">
+      {$form['name']->label}
+      <div class="col-xs-9">
+        {$form['name']->control}
+      </div>
+    </div>
+    <div class="form-group">
+      {$form['surname']->label}
+      <div class="col-xs-9">
+        {$form['surname']->control}
+      </div>
+    </div>
+    <div class="form-group">
+      {$form['address']->label}
+      <div class="col-xs-9">
+        {$form['address']->control}
+      </div>
+    </div>
+    <div class="form-group">
+      {$form['year']->label}
+      <div class="col-xs-9">
+        {$form['year']->control}
+      </div>
+    </div>
+    <div class="form-group">
+      {$form['identification']->label}
+      <div class="col-xs-9">
+        {$form['identification']->control}
+      </div>
+    </div>
+    <div class="form-group">
+      {$form['email']->label}
+      <div class="col-xs-9">
+        {$form['email']->control}
+      </div>
+    </div>
+    <div class="form-group">
+      {$form['phone']->label}
+      <div class="col-xs-9">
+        {$form['phone']->control}
+      </div>
+    </div>
+    <div class="form-group">
+      {$form['phoneParrents']->label}
+      <div class="col-xs-9">
+        {$form['phoneParrents']->control}
+      </div>
+    </div>
+    <div class="form-group">
+      {$form['healthConstraints']->label}
+      <div class="col-xs-9">
+        {$form['healthConstraints']->control}
+      </div>
+    </div>
+    <div class="form-group">
+      {$form['hobby']->label}
+      <div class="col-xs-9">
+        {$form['hobby']->control}
+      </div>
+    </div>
+    <div class="form-group hidden">
+      <div class="col-xs-offset-3 col-xs-9">
+        {$form['captcha']->control}
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-xs-offset-3 col-xs-9">
+        <div id="captcha"></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-xs-offset-3 col-xs-9">
+        {$form['send']->control}
+      </div>
+    </div>
+
+    {$form->render('end')}
+
+  </div>
+
+  <script type="text/javascript">
+    function loadCaptcha() {l}
+      cId = grecaptcha.render('captcha', {l}
+        'sitekey' : '6LeGrgoTAAAAADcm2eibbollw7PzMHt14nPu6Npi',
+        'callback' : captchaCallback,
+        'expired-callback' : captchaCallbackExpired,
+      {r});
+      return cId;
+    {r};
+
+    function captchaCallback() {l}
+      $('#frm-captcha').prop("checked", true);
+    {r}
+
+    function captchaCallbackExpired() {l}
+      $('#frm-captcha').prop("checked", false);
+    {r}
+  </script>
+{/define}

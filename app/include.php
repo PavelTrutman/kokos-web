@@ -48,6 +48,12 @@
       'glyphicon' => 'puzzle-piece',
     ),
 
+    'soustredeni' => array(
+      'name' => 'Soustředění',
+      'link' => '/soustredeni',
+      'glyphicon' => 'child',
+    ),
+
     'fotogalerie' => array(
       'name' => 'Fotogalerie',
       'link' => '/fotogalerie',
