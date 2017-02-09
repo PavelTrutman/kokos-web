@@ -30,7 +30,8 @@ $template['camp'] = $camp;
 if($camp) {
   $campId = $camp['Id'];
   $openDate = new DateTime($camp['OpenDate']);
-  $closureDate = (new DateTime($camp['ClosureDate']))->modify('tomorrow');
+  $closureDate = new DateTime($camp['ClosureDate']);
+  $closureDate = $closureDate->modify('tomorrow');
   $nowDate = new DateTime();
   $template['openDate'] = $openDate;
   $template['closureDate'] = $closureDate;
