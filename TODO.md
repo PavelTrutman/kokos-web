@@ -22,6 +22,7 @@
 
 ### Akce
   * předvyplnění údajů pro přihlášeného uživatele
+  * přidat pole pro výběr školy
 
 ### User sekce
 
