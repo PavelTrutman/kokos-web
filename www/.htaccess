@@ -8,7 +8,7 @@
 
 RewriteEngine on
 RewriteRule ^uvod$ /index.php
-RewriteRule ^$ /uvod
+RewriteRule ^$ /uvod [R]
 RewriteRule ^prihlaska$ /prihlaska.php
 RewriteRule ^soustredeni$ /soustredeni.php
 RewriteRule ^serie$ /serie.php
